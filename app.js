@@ -1,14 +1,14 @@
 //jshint esversion:6
-
+const randkey = require('random-keygen');
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var _ = require('lodash');
-
-const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
-const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
-const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
-
+const _ = require('lodash');
+const mongoose = require('mongoose')
+const session = require('express-session')
+const passport = require('passport')
+const passportLocalMongoose = require('passport-local-mongoose')
+const LocalStrategy = require('passport-local').Strategy;
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -17,62 +17,238 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
+app.use(session({
+  secret: "kjbdf23bedsni322j5h643nbthj5bkrn3",
+  resave: false,
+  saveUninitialied: false
+}));
 
-//GLOBAL var
-var posts = [];
+app.use(passport.initialize());
+app.use(passport.session());
+
+const postsDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Posts?retryWrites=true/postsDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const usersDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Users?retryWrites=true/usersDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+var usersSchema = mongoose.Schema({
+  name: String,
+  username: String,
+  email: String,
+  password: String
+});
+
+var postSchema = mongoose.Schema({
+  _id: String,
+  username: String,
+  title: String,
+  body: String
+});
+
+mongoose.plugin(passportLocalMongoose);
+
+
+var User = usersDB.model("User", usersSchema);
+var Post = postsDB.model("Post", postSchema);
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get("/", function(req, res) {
-  res.render("home", {
-    homecontent: homeStartingContent,
-    posts: posts
+
+  if (req.isAuthenticated()) {
+
+    var success = true;
+    Post.find({}, function(err, posts) {
+      if (err) {
+        console.log(err);
+        success = false;
+      } else {
+        res.render("home", {
+          posts: posts
+        });
+      }
+    });
+
+    if (!success) {
+      res.send("<h1>Error while loading the posts</h1>")
+    }
+  } else {
+    res.redirect('/login');
+  }
+
+});
+
+
+app.get("/compose", function(req, res) {
+  if (!req.isAuthenticated()) {
+    res.redirect('/login')
+  } else {
+    res.render("compose");
+  }
+});
+
+app.get("/post/:postID", function(req, res) {
+  var postToLookFor = req.params.postID;
+  Post.findOne({
+    _id: postToLookFor
+  }, function(err, post) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (post === null) {
+        res.send(" <h1> Can't find post</h1>");
+      } else {
+        res.render("post", {
+          currentUser: req.user.username,
+          id: post._id,
+          username: post.username,
+          title: post.title,
+          body: post.body
+        });
+      }
+    }
   });
 });
 
-app.get("/about", function(req, res) {
-  res.render("about", {
-    aboutcontent: aboutContent
-  });
-});
-
-app.get("/contact", function(req, res) {
-  res.render("contact", {
-    contactcontent: contactContent
+app.get("/user/:user", function(req, res) {
+  var userToLookFor = req.params.user;
+  User.findOne({
+    username: userToLookFor
+  }, function(err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (user === null) {
+        res.send("<h1>Can't find user</h1>");
+      } else {
+        res.render("user", {
+          name: user.name,
+          username: user.username
+        })
+      }
+    }
   })
 })
 
-app.get("/compose", function(req, res) {
-  res.render("compose");
+app.get("/login", function(req, res) {
+
+  if (req.isAuthenticated()) {
+    res.redirect("/")
+  } else {
+    res.render("login");
+  }
+})
+
+app.get("/register", function(req, res) {
+  if (req.isAuthenticated()) {
+    res.redirect("/")
+  } else {
+    res.render("register");
+  }
+})
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
 });
 
-app.get("/post/:postName", function(req, res) {
-  var requestedTitle = _.lowerCase(req.params.postName);
+app.post('/register', function(req, res) {
+  User.register({
+      name: req.body.name,
+      email: req.body.email,
+      username: req.body.username
+    },
+    password = req.body.password,
+    function(err, result) {
+      if (err) {
+        console.log(err)
+        res.redirect('/register')
+      } else {
+        passport.authenticate('local')(req, res, function() {
+          res.redirect("/")
+        })
+      }
+    })
+});
 
-  posts.forEach(function(post) {
-    var t = post.title;
-    var b = post.body;
-    if (_.lowerCase(post.title) === requestedTitle) {
-      res.render("post", {
-        postTitle: t,
-        postBody: b
-      })
-    }
+
+app.post('/login', function(req, res) {
+
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password
   });
 
-
+  req.login(user, function(err) {
+    if (err) {
+      console.log(err)
+    } else {
+      passport.authenticate('local')(req, res, function() {
+        res.redirect("/")
+      });
+    }
+  })
 
 })
 
 app.post("/compose", function(req, res) {
-  var post = {
-    title: req.body.title,
-    body: req.body.post
+  if (!req.isAuthenticated()) {
+    res.redirect("/")
+  } else {
+
+    const currentUser = req.user;
+    var key = randkey.get({
+      length: 6,
+      numbers: true
+    });
+    var post = new Post({
+      _id: key,
+      username: currentUser.username,
+      title: req.body.title,
+      body: req.body.post
+    });
+
+    post.save();
+
+
+    res.redirect('/');
   }
-  posts.push(post);
-  res.redirect('/');
 })
 
 
-
+app.post("/remove/:postID", function(req, res) {
+  Post.findOne({
+    _id: req.params.postID
+  }, function(err, result) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(result)
+      if (result === null) {
+        res.redirect('/')
+      } else {
+        Post.deleteOne({
+          _id: req.params.postID
+        }, function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect("/");
+          }
+        });
+      }
+    }
+  });
+})
 
 
 
