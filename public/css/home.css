@@ -1,0 +1,15 @@
+body {
+  padding-top: 56px;
+  background: #007bff;
+  background: linear-gradient(to right, #eaac9d, #f0daa4);
+}
+.card{
+  background: rgba(128,128,128,0.3) !important;
+  margin: 10px;
+}
+a{
+  color: black;
+}
+.card-footer{
+  background: rgba(128,128,128,0.5) !important;
+}
