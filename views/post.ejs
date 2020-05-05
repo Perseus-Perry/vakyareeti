@@ -1,12 +1,40 @@
 <%- include("partials/header"); -%>
-<div style="white-space: pre-wrap">
-<h1><%=title%></h1>
-<h3>by <%=username%></h3>
-<p><%=body%></p>
-<% if(currentUser === username) { %>
-  <form action="/remove/<%=id%>" method="post">
-  <button type="submit" name="button">REMOVE</button>
-  </form>
-</div>
-<%}%>
-<%- include("partials/footer"); -%>
+<!-- Page Content -->
+  <img class="img-responsive w-100" src="img/logo.jpg" alt="!title">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-3">
+
+        <h1 class="my-4">Sidemenu</h1>
+        <div class="list-group">
+          <a href="#" class="list-group-item">About Us </a>
+          <a href="#" class="list-group-item">Competitions</a>
+          <a href="#" class="list-group-item">More</a>
+        </div>
+
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-9">
+
+        <div class="col-12">
+
+          <div style="white-space: pre-wrap">
+            <h1><%=title%></h1>
+            <h5>By <a href="#"><%=username%></a> DATE</h5>
+            <div class="container">
+              <p><%=body%></p>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+
+    <%- include("partials/footer"); -%>
