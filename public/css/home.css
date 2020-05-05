@@ -27,6 +27,9 @@ a{
 .card-footer{
   background: rgba(128,128,128,0.5) !important;
 }
+.list-group-item{
+  background: rgba(128,128,128,0.1) !important;
+}
 
 
 .theme-switch-wrapper {

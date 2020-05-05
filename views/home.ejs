@@ -3,43 +3,7 @@
 </head>
 
 <body>
-<!-- Navigation -->
-<div class="container-fluid bg-dark fixed-top custom-nav">
-  <div class="row">
-    <div class="col-3">
-      <img height="30" width="30" src="fav.png"> Vakyareeti
-    </div>
-    <div class="col-3">
-      <form class="form-inline">
-        <i class="fa fa-search"></i>
-        <input class="form-control form-control-sm ml-3" type="text" placeholder="Search" aria-label="Search">
-      </form>
-    </div>
-    <div class="col-3">
-    </div>
-    <div class="col-3">
-      <div class="row">
-        <div class="col-3">
-          <a href="/home">Feed</a>
-        </div>
-        <div class="col-3">
-          <a href="/explore">Explore</a>
-        </div>
-        <div class="col-3 dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user"></i> !User
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" onclick="toggleMode()" href="#">Toggle</a>
-            <a class="dropdown-item" href="/compose">Compose</a>
-            <a class="dropdown-item" href="/logout">Logout</a>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
-</div>
+<%- include("partials/nav"); -%>
 
 
 
@@ -56,14 +20,7 @@
   <div class="row">
 
     <div class="col-lg-3">
-
-      <h1 class="my-4">Sidemenu</h1>
-      <div class="list-group">
-        <a href="#" class="list-group-item">About Us </a>
-        <a href="#" class="list-group-item">Competitions</a>
-        <a href="#" class="list-group-item">More</a>
-      </div>
-
+      <%- include("partials/sidebar"); -%>
     </div>
     <!-- /.col-lg-3 -->
 
