@@ -1,4 +1,5 @@
 //jshint esversion:6
+
 const randkey = require('random-keygen');
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -10,7 +11,7 @@ const passport = require('passport')
 const passportLocalMongoose = require('passport-local-mongoose')
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
-
+const Jimp = require('jimp');
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
@@ -182,7 +183,7 @@ app.post('/login', function(req, res) {
     password: req.body.password
   });
 
-  console.log(user);
+
 
   req.login(user, function(err) {
     if (err) {
@@ -197,6 +198,7 @@ app.post('/login', function(req, res) {
 })
 
 app.post("/compose", function(req, res) {
+  console.log(req.body.image);
   if (!req.isAuthenticated()) {
     res.redirect("/")
   } else {
