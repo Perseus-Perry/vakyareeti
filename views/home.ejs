@@ -1,4 +1,5 @@
 <%- include("partials/header"); -%>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -60,7 +61,8 @@
             <h6 class="card-subtitle">
               <a href="/user/<%=posts[i].username%>">By <%=posts[i].username%></a>
             </h6>
-            <% var body = posts[i].body.substring(1, 100) + " ...Read More"; %>
+            <% var body = posts[i].body.substring(0, 100) %>
+            <% body = body.substring(0,body.lastIndexOf(" ")) + " ...Read More" %> 
             <a href="/post/<%=posts[i]._id%>"><p class="card-text"><%=body%></p></a>
           </div>
           <div class="card-footer">
@@ -94,6 +96,7 @@
 
 </div>
 <!-- /.row -->
+
 
 
 <!-- /.container -->

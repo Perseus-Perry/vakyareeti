@@ -232,7 +232,6 @@ app.post("/remove/:postID", function(req, res) {
     if (err) {
       console.log(err)
     } else {
-      console.log(result)
       if (result === null) {
         res.redirect('/')
       } else {
