@@ -51,53 +51,56 @@
 
 
       <% for(var i=0;i<posts.length;i++) {%>
-      <div class="col-lg-3 col-md-4 mb-3">
-        <div class="card h-100">
-          <a href="/post/<%=posts[i]._id%>"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href='/post/<%=posts[i]._id%>'><%=posts[i].title%></a>
-            </h4>
-            <h6 class="card-subtitle">
-              <a href="/user/<%=posts[i].username%>">By <%=posts[i].username%></a>
-            </h6>
-            <% var body = posts[i].body.substring(0, 100) %>
-            <% body = body.substring(0,body.lastIndexOf(" ")) + " ...Read More" %> 
-            <a href="/post/<%=posts[i]._id%>"><p class="card-text"><%=body%></p></a>
-          </div>
-          <div class="card-footer">
-            <div class="row">
-              <div class="col-8">
-                <p>Votes: 1000</P>
-              </div>
-              <div class="col-2">
-                <a href="#"><i class="fa fa-angle-double-up"></i></a>
-              </div>
-              <div class="col-2">
-                <a href="#"><i class="fa fa-angle-double-down"></i></a>
+        <div class="col-lg-3 col-md-4 mb-3">
+          <div class="card h-100">
+            <a href="/post/<%=posts[i]._id%>"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href='/post/<%=posts[i]._id%>'><%=posts[i].title%></a>
+              </h4>
+              <h6 class="card-subtitle">
+                <a href="/user/<%=posts[i].username%>">By <%=posts[i].username%></a>
+              </h6>
+              <% var body = posts[i].body.substring(0, 100) %>
+              <% body = body.substring(0,body.lastIndexOf(" ")) %>
+              <p class="card-text">
+                <%=body%>    
+                <a href="/post/<%=posts[i]._id%>">+ " ...Read More"</a>
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-8">
+                  <p>Votes: 1000</P>
+                  </div>
+                  <div class="col-2">
+                    <a href="#"><i class="fa fa-angle-double-up"></i></a>
+                  </div>
+                  <div class="col-2">
+                    <a href="#"><i class="fa fa-angle-double-down"></i></a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+          <%}%>
+
+
+
+
+
+
         </div>
+        <!-- /.row -->
+
       </div>
-
-      <%}%>
-
-
-
-
-
+      <!-- /.col-lg-9 -->
 
     </div>
     <!-- /.row -->
 
-  </div>
-  <!-- /.col-lg-9 -->
-
-</div>
-<!-- /.row -->
 
 
-
-<!-- /.container -->
-<%- include("partials/footer"); -%>
+    <!-- /.container -->
+    <%- include("partials/footer"); -%>
