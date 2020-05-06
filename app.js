@@ -170,7 +170,8 @@ app.post('/register', function(req, res) {
   User.register({
       name: req.body.name,
       email: req.body.remail,
-      username: req.body.username
+      username: req.body.username,
+      password: req.body.password
     },
     password = req.body.password,
     function(err, result) {
