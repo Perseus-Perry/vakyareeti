@@ -48,7 +48,10 @@ var postSchema = mongoose.Schema({
   _id: String,
   username: String,
   title: String,
-  body: String
+  body: String,
+  votes: Number
+}, {
+  timestamps: true
 });
 
 mongoose.plugin(passportLocalMongoose);
@@ -113,7 +116,8 @@ app.get("/post/:postID", function(req, res) {
           id: post._id,
           username: post.username,
           title: post.title,
-          body: post.body
+          body: post.body,
+          votes: 0
         });
       }
     }
@@ -173,6 +177,52 @@ app.post('/register', function(req, res) {
     })
 });
 
+app.get("/admin", function(req, res) {
+  res.render("admin", {
+    posts: {
+      _id: "7WmRfK",
+      username: "naruto1715",
+      title: "Validators",
+      body: "Dates have two built-in validators: min and max. These validators will...",
+      createdAt: '2020 - 05 - 06 T18: 01: 32.100 + 00: 00',
+      updatedAt: '2020 - 05 - 06 T18: 01: 32.100 + 00: 00'
+    }
+  })
+})
+
+app.post("/admin", function(req, res) {
+  var searched = req.body.searchQuery;
+  if (req.body.optradio === "author") {
+    Post.find({
+      username: searched
+    }, function(err, docs) {
+      if (err) {
+        console.log(err)
+        res.send("<h1>error</h1>");
+      } else {
+        console.log(docs)
+        res.render("admin", {
+          posts: docs
+        })
+      }
+    })
+  } else {
+    Post.find({
+      title: searched
+    }, function(err, docs) {
+      if (err) {
+        console.log(err)
+        res.send("<h1>error</h1>");
+      } else {
+        console.log(docs)
+        res.render("admin", {
+          posts: docs
+        })
+      }
+    })
+
+  }
+})
 
 app.post('/login', function(req, res) {
 
@@ -202,7 +252,6 @@ app.post("/compose", function(req, res) {
   if (!req.isAuthenticated()) {
     res.redirect("/")
   } else {
-
     const currentUser = req.user;
     var key = randkey.get({
       length: 6,
