@@ -100,6 +100,14 @@ app.get("/compose", function(req, res) {
   }
 });
 
+app.get("/feed", function(req, res) {
+  if (!req.isAuthenticated()) {
+    res.redirect('/authenticate')
+  } else {
+    res.render("feed");
+  }
+});
+
 app.get("/post/:postID", function(req, res) {
   var postToLookFor = req.params.postID;
   Post.findOne({
