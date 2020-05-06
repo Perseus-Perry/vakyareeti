@@ -1,0 +1,63 @@
+<%- include("partials/header"); -%>
+<title>Vakyareeti</title>
+</head>
+
+<body>
+  <%- include("partials/nav"); -%>
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-lg-9">
+
+        <div class="row">
+          <% for(var i=0;i<posts.length;i++) {%>
+            <div class="col-12">
+              <div class="card h-100 ">
+                <div class="row">
+                  <div class="col-4">
+                    <a href="/post/<%=posts[i]._id%>"><img class="card-img-top" src="img/logo.jpg" alt=""></a>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="/post/<%=posts[i]._id%>"><%=posts[i].title%></a>
+                      </h4>
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        <a href="/user/<%=posts[i].username%>">By <%=posts[i].username%></a>
+                      </h6>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <% var body = posts[i].body.substring(0, 100) %>
+                    <% body = body.substring(0,body.lastIndexOf(" ")) + " ...Read More" %>
+                    <a href="/post/<%=posts[i]._id%>"><p class="card-text"><%=body%></p></a>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-8">
+                        <p>Votes: <%=posts[i].votes%></P>
+                        </div>
+                        <div class="col-2">
+                          <a href="#"><i class="fa fa-angle-double-up"></i></a>
+                        </div>
+                        <div class="col-2">
+                          <a href="#"><i class="fa fa-angle-double-down"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <%- include("partials/sidebar"); -%>
+            </div>
+          </div>
+        </div>
+
+
+        <script src="js/script.js">
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <%- include("partials/footer"); -%>
