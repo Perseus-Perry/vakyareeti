@@ -1,10 +1,17 @@
 
 body {
     padding-top: 56px;
-    background-color: #dfdfdf;
+    background-size: 250px;
+    background-image : url("/img/bg.jpg");
+    background-repeat: repeat;
 }
 a{
-  color:white;
+  color:black;
+}
+
+a:hover{
+  color:black;
+  text-decoration: underline;
 }
 .card-img-top{
       max-width: 100%;
