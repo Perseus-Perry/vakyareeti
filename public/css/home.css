@@ -1,21 +1,6 @@
-:root {
-    --primary-color: #302AE6;
-    --secondary-color: #536390;
-    --font-color: #424242;
-    --bg-color: #fff;
-    --heading-color: #292922;
-}
-[data-theme="dark"] {
-    --primary-color: #9A97F3;
-    --secondary-color: #818cab;
-    --font-color: #e1e1ff;
-    --bg-color: #161625;
-    --heading-color: #818cab;
-}
+
 body {
     padding-top: 56px;
-    background-color: var(--bg-color);
-    color: var(--font-color);
 }
 .card{
   background: rgba(128,128,128,0.3) !important;
@@ -26,4 +11,19 @@ body {
 }
 .list-group-item{
   background: rgba(128,128,128,0.1) !important;
+}
+a.sic {
+    position: relative;
+    left: 300px;
+
+    z-index: 10000;
+}
+input.search-form {
+    padding: 10px;
+}
+#searchbar {
+    width: 300px;
+}
+.search-toggle {
+    float: right;
 }
