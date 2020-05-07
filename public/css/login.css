@@ -4,11 +4,13 @@
 }
 
 body {
-  background: #007bff;
-  background: linear-gradient(to right, #0062E6, #33AEFF);
-}
+  background-image: url("/img/login-bg.jpg");
+   background-repeat: repeat;
+   background-size: 400px;
+ }
 
 .card-signin {
+  background-color: #00263b;
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);

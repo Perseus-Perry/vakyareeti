@@ -48,8 +48,7 @@ const postVotesDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJ
 var usersSchema = mongoose.Schema({
     name: String,
     username: String,
-    email: String,
-    password: String
+    email: String
 });
 
 var postSchema = mongoose.Schema({
@@ -189,8 +188,7 @@ app.post('/register', function (req, res) {
     User.register({
             name: req.body.name,
             email: req.body.remail,
-            username: req.body.username,
-            password: req.body.password
+            username: req.body.username
         },
         password = req.body.password,
         function (err, result) {
@@ -265,7 +263,7 @@ app.post('/login', function (req, res) {
         if(err) {
             console.log(err)
         } else {
-            passport.authenticate('local')(req, res, function () {
+            passport.authenticate('local', { successRedirect:'/', failureRedirect: '/authenticate' })(req, res, function () {
                 res.redirect("/")
             });
         }
