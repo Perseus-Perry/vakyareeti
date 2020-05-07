@@ -1,4 +1,5 @@
 var mode = 1;
+
 function toggleMode() {
   if(mode==1) {
     document.getElementById('mode').href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css";
