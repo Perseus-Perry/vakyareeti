@@ -11,7 +11,10 @@ const passport = require('passport')
 const passportLocalMongoose = require('passport-local-mongoose')
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
+const http = require('http').Server(app);
 const Jimp = require('jimp');
+const server = require('http').createServer(app);
+const io = require('socket.io')(http);
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
@@ -208,7 +211,6 @@ app.post("/admin", function(req, res) {
         console.log(err)
         res.send("<h1>error</h1>");
       } else {
-        console.log(docs)
         res.render("admin", {
           posts: docs
         })
@@ -222,7 +224,6 @@ app.post("/admin", function(req, res) {
         console.log(err)
         res.send("<h1>error</h1>");
       } else {
-        console.log(docs)
         res.render("admin", {
           posts: docs
         })
@@ -269,7 +270,8 @@ app.post("/compose", function(req, res) {
       _id: key,
       username: currentUser.username,
       title: req.body.title,
-      body: req.body.post
+      body: req.body.post,
+      votes: 0
     });
 
     post.save();
@@ -304,8 +306,13 @@ app.post("/remove/:postID", function(req, res) {
   });
 })
 
+io.on('connection', function(socket) {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+})
 
-
-app.listen(process.env.PORT || 3000, function() {
+http.listen(process.env.PORT || 3000, function() {
   console.log("Server started");
 });

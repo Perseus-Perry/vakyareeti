@@ -19,6 +19,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "random-keygen": "^1.0.4"
+    "random-keygen": "^1.0.4",
+    "socket.io": "^2.3.0"
   }
 }
