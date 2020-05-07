@@ -128,7 +128,7 @@ app.get("/post/:postID", function(req, res) {
           username: post.username,
           title: post.title,
           body: post.body,
-          votes: 0
+          votes: post.votes
         });
       }
     }
@@ -309,8 +309,32 @@ app.post("/remove/:postID", function(req, res) {
 
 io.on('connection', function(socket) {
   console.log('a user connected');
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
+  socket.on('upvote', (id) => {
+    console.log(id + " upvoted");
+    Post.findOne({
+      _id: id
+    }, function(err, doc) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(doc)
+        doc.votes += 1;
+        doc.save();
+      }
+    })
+  });
+  socket.on('downvote', (id) => {
+    console.log(id + " downvoted");
+    Post.findOne({
+      _id: id
+    }, function(err, doc) {
+      if (err) {
+        console.log(err)
+      } else {
+        doc.votes -= 1;
+        doc.save();
+      }
+    })
   });
 })
 

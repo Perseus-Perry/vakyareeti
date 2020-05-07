@@ -14,7 +14,9 @@
               <p><%=body%></p>
             </div>
           </div>
-
+          <h3 class="votes"><%=votes%></h3>
+          <button onclick="upvote('<%=id%>')">Upvote</button>
+          <button onclick="downvote('<%=id%>')">Downvote</button>
         </div>
         <!-- /.col-lg-9 -->
 
@@ -22,5 +24,6 @@
       <!-- /.row -->
 
     </div>
-
+    <script src="/js/socket.io.js"></script>
+    <script src="/js/vote.js"></script>
     <%- include("partials/footer"); -%>
