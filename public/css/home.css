@@ -1,7 +1,7 @@
 
 body {
     padding-top: 56px;
-    background-color: #f7f7f7;
+    background-color: #dfdfdf;
 }
 a{
   color:white;
@@ -12,7 +12,7 @@ a{
       display: block; /* remove extra space below image */
   }
 .card{
-  background: #fa744f !important;
+  background: #f7f7f7 !important;
   margin: 10px;
 }
 .card-footer{
@@ -37,7 +37,7 @@ input.search-form {
     float: right;
 }
 .navbar {
-  background: #222831 !important;
+  background: #f7f7f7 !important;
 }
 .card-title{
   color:white;
