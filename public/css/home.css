@@ -21,9 +21,6 @@ body {
   background: rgba(128,128,128,0.3) !important;
   margin: 10px;
 }
-a{
-  color: black;
-}
 .card-footer{
   background: rgba(128,128,128,0.5) !important;
 }
