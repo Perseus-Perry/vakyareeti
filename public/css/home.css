@@ -1,37 +1,29 @@
 
 body {
     padding-top: 56px;
-    background-size: 250px;
-    background-image : url("/img/bg.jpg");
-    background-repeat: repeat;
+    background-color: #c3edea;
 }
 a{
-  color:black;
-}
-
-a:hover{
-  color:black;
-  text-decoration: underline;
+  color:white;
 }
 .card-img-top{
       max-width: 100%;
       max-height: 100%;
       display: block; /* remove extra space below image */
   }
-.card{
-  background: #f7f7f7 !important;
-  margin: 10px;
-}
-.card-footer{
-  background: #ff5733 !important;
-}
-.list-group-item{
-  background: rgba(128,128,128,0.1) !important;
-}
+  .card{
+    background: rgba(128,128,128,0.3) !important;
+    margin: 10px;
+  }
+  .card-footer{
+    background: rgba(128,128,128,0.5) !important;
+  }
+  .list-group-item{
+    background: rgba(128,128,128,0.1) !important;
+  }
 a.sic {
     position: relative;
     left: 300px;
-
     z-index: 10000;
 }
 input.search-form {
@@ -42,11 +34,6 @@ input.search-form {
 }
 .search-toggle {
     float: right;
-}
-.navbar {
-  background: #f7f7f7 !important;
-  color : black;
-  font-weight: bold;
 }
 .card-title{
   color:white;
