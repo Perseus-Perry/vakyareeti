@@ -55,6 +55,7 @@ var usersSchema = mongoose.Schema({
 var postSchema = mongoose.Schema({
     _id: String,
     username: String,
+    image:String,
     title: String,
     body: String,
     votes: Number
@@ -64,6 +65,7 @@ var postSchema = mongoose.Schema({
 
 var postVotesSchema = mongoose.Schema({
   _id: String,
+  username:String,
   likeCount:Number,
   dislikeCount:Number,
   likes : Array,
@@ -121,7 +123,7 @@ app.get("/feed", function (req, res) {
     if(!req.isAuthenticated()) {
         res.redirect('/authenticate')
     } else {
-        res.render("feed");
+        res.render("feed",[{}]);
     }
 });
 
@@ -284,12 +286,14 @@ app.post("/compose", function (req, res) {
         var post = new Post({
             _id: key,
             username: currentUser.username,
+            image: req.body.image,
             title: req.body.title,
             body: req.body.post,
             votes: 0
         });
         var postVote = new PostVotes({
           _id:key,
+          username: currentUser.username,
           likeCount:0,
           dislikeCount:0,
           likes:[],
