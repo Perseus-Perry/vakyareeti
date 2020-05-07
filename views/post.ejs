@@ -1,4 +1,10 @@
 <%- include("partials/header"); -%>
+
+<title><%=title%></title>
+</head>
+<body>
+
+
 <!-- Page Content -->
   <img class="img-responsive w-100" src="img/logo.jpg" alt="!title">
   <div class="container">
@@ -14,8 +20,8 @@
               <p><%=body%></p>
             </div>
             <h3 class="votes"><%=votes%></h3>
-            <a href="#" id='upvote' onclick="upvote('<%=id%>')">upvote</a>
-            <a href="#" id='downvote' onclick="downvote('<%=id%>')">Downvote</a>
+            <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+            <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
           </div>
 
         </div>
