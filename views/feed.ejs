@@ -10,7 +10,6 @@
     <div class="row">
 
       <div class="col-lg-9">
-
         <% for(var i=0;i<posts.length;i++) {%>
           <div class="row mb-2">
             <div class="card flex-md-row mb-4 shadow-sm w-100">
@@ -18,12 +17,14 @@
               <div class="card-body d-flex flex-column align-items-start">
                 <strong class="d-inline-block mb-2 text-primary">World</strong>
                 <h3 class="mb-0">
-                  <a class="text-dark" href="#">Featured post</a>
+                  <a class="text-dark" href="/post/<%=posts[i]._id%>" > <%=posts[i].title%> </a>
                 </h3>
-                <div class="mb-1 text-muted">Nov 12</div>
-                <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                <div class="mb-1 text-muted">By <a href="/user/<%=posts[i].username%>"> <%=posts[i].username%></a> </a></div>
+                <% var body = posts[i].body.substring(0, 100) %>
+                <% body = body.substring(0,body.lastIndexOf(" ")) + " ...Read More" %>
+                <p class="card-text mb-auto"><%=body%></p>
                 <a href="#">Continue reading</a>
-              </div>
+
               <div class="card-footer">
                 <div class="row">
                   <div class="col-8">
@@ -37,6 +38,7 @@
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
             <%}%>
