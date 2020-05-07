@@ -1,6 +1,10 @@
 
 body {
     padding-top: 56px;
+    background-color: #1b262c;
+}
+a{
+  color:white;
 }
 .card-img-top{
       max-width: 100%;
@@ -32,6 +36,12 @@ input.search-form {
 .search-toggle {
     float: right;
 }
+<<<<<<< HEAD
 .topbar {
   background: rgba(128,128,128,0.3) !important;
+=======
+
+.card-title{
+  color:white;
+>>>>>>> 55d442f3ba68412d5a386c49a411a269024a1755
 }

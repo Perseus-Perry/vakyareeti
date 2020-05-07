@@ -84,7 +84,33 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+
 app.get("/", function (req, res) {
+  if(req.isAuthenticated()) {
+
+      var success = true;
+      Post.find({}, function (err, posts) {
+          if(err) {
+              console.log(err);
+              success = false;
+          } else {
+              res.render("feed", {
+                  posts: posts
+              });
+          }
+      });
+
+      if(!success) {
+          res.send("<h1>Error while loading the posts</h1>")
+      }
+  } else {
+      res.redirect('/authenticate');
+  }
+});
+
+
+app.get("/explore", function (req, res) {
 
     if(req.isAuthenticated()) {
 
@@ -94,7 +120,7 @@ app.get("/", function (req, res) {
                 console.log(err);
                 success = false;
             } else {
-                res.render("home", {
+                res.render("explore", {
                     posts: posts
                 });
             }
@@ -118,13 +144,6 @@ app.get("/compose", function (req, res) {
     }
 });
 
-app.get("/feed", function (req, res) {
-    if(!req.isAuthenticated()) {
-        res.redirect('/authenticate')
-    } else {
-        res.render("feed",[{}]);
-    }
-});
 
 app.get("/post/:postID", function (req, res) {
     var postToLookFor = req.params.postID;
