@@ -37,7 +37,13 @@ input.search-form {
     float: right;
 }
 .navbar {
+<<<<<<< HEAD
   background: #000 !important;
+=======
+  background: #f7f7f7 !important;
+  color : black;
+  font-weight: bold;
+>>>>>>> 7ed726f8930b350c9d5dc0fac9c66f4a6b84515e
 }
 .card-title{
   color:white;
