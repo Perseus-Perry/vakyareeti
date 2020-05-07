@@ -32,3 +32,6 @@ input.search-form {
 .search-toggle {
     float: right;
 }
+.topbar {
+  background: rgba(128,128,128,0.3) !important;
+}
