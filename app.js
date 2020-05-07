@@ -48,7 +48,9 @@ const postVotesDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJ
 var usersSchema = mongoose.Schema({
     name: String,
     username: String,
-    email: String
+    email: String,
+    followers : Array,
+    following : Array
 });
 
 var postSchema = mongoose.Schema({
@@ -180,7 +182,24 @@ app.get("/user/:user", function (req, res) {
             if(user === null) {
                 res.send("<h1>Can't find user</h1>");
             } else {
+              var followed = false;
+                User.findOne({username:user.username},function(err,targetUser){
+                  if(err){
+                    console.log(err);
+                  }
+                  else{
+                    console.log(targetUser.followers.includes(req.user.username))
+                    if(targetUser.followers.includes(req.user.username)){
+                      followed = true;
+                    }
+                    else{
+                      followed = false;
+                    }
+                  }
+                })
                 res.render("user", {
+                    followed : followed,
+                    currentUser : req.user.username,
                     name: user.name,
                     username: user.username
                 })
@@ -207,7 +226,9 @@ app.post('/register', function (req, res) {
     User.register({
             name: req.body.name,
             email: req.body.remail,
-            username: req.body.username
+            username: req.body.username,
+            followers : [],
+            following : []
         },
         password = req.body.password,
         function (err, result) {
@@ -349,7 +370,6 @@ app.post("/remove/:postID", function (req, res) {
 })
 
 io.on('connection', function (socket) {
-    console.log('a user connected');
     socket.on('upvote', (id) => {
         console.log(id + " upvoted");
         Post.findOne({
@@ -376,6 +396,35 @@ io.on('connection', function (socket) {
             }
         })
     });
+    socket.on('follow',(data) => {
+      User.findOne({
+        username:data.username
+      },function(err,user){
+        if(err){
+          console.log(err)
+        }
+        else{
+
+          user.followers.push(data.currentUser);
+          user.save();
+        }
+      })
+    })
+
+    socket.on('unfollow',(data) => {
+      User.findOne({
+        username:data.username
+      },function(err,user){
+        if(err){
+          console.log(err)
+        }
+        else{
+
+          user.followers.remove(data.currentUser);
+          user.save();
+        }
+      })
+    })
 })
 
 http.listen(process.env.PORT || 3000, function () {
