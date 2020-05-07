@@ -8,7 +8,7 @@
     }
 
     socket.emit('upvote', id);
-    document.querySelector(".votes").textContent = var + 1;
+    document.querySelector(".votes").textContent = init + 1;
   }
 
   function downvote(id) {
@@ -18,5 +18,5 @@
     }
 
     socket.emit('downvote', id);
-    document.querySelector(".votes").textContent = var - 1;
+    document.querySelector(".votes").textContent = init - 1;
   }
