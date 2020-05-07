@@ -1,6 +1,10 @@
 
 body {
     padding-top: 56px;
+    background-color: #1b262c;
+}
+a{
+  color:white;
 }
 .card-img-top{
       max-width: 100%;
@@ -31,4 +35,8 @@ input.search-form {
 }
 .search-toggle {
     float: right;
+}
+
+.card-title{
+  color:white;
 }

@@ -122,7 +122,16 @@ app.get("/feed", function (req, res) {
     if(!req.isAuthenticated()) {
         res.redirect('/authenticate')
     } else {
-        res.render("feed",[{}]);
+      Post.find({}, function (err, posts) {
+          if(err) {
+              console.log(err);
+              success = false;
+          } else {
+              res.render("feed", {
+                  posts: posts
+              });
+          }
+      });
     }
 });
 
