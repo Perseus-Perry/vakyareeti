@@ -38,6 +38,8 @@ input.search-form {
 }
 .navbar {
   background: #f7f7f7 !important;
+  color : black;
+  font-weight: bold;
 }
 .card-title{
   color:white;
