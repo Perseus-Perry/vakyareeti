@@ -40,6 +40,11 @@ const usersDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG
     useUnifiedTopology: true
 });
 
+const postVotesDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Votes?retryWrites=true/postVotesDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 var usersSchema = mongoose.Schema({
     name: String,
     username: String,
@@ -57,11 +62,20 @@ var postSchema = mongoose.Schema({
     timestamps: true
 });
 
+var postVotesSchema = mongoose.Schema({
+  _id: String,
+  likeCount:Number,
+  dislikeCount:Number,
+  likes : Array,
+  dislikes: Array
+});
+
 mongoose.plugin(passportLocalMongoose);
 
 
 var User = usersDB.model("User", usersSchema);
 var Post = postsDB.model("Post", postSchema);
+var PostVotes = postVotesDB.model("PostVote",postVotesSchema);
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
 
@@ -274,9 +288,16 @@ app.post("/compose", function (req, res) {
             body: req.body.post,
             votes: 0
         });
+        var postVote = new PostVotes({
+          _id:key,
+          likeCount:0,
+          dislikeCount:0,
+          likes:[],
+          dislikes:[]
+        })
 
         post.save();
-
+        postVote.save();
 
         res.redirect('/');
     }
