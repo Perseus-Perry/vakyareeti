@@ -49,14 +49,14 @@ var usersSchema = mongoose.Schema({
     name: String,
     username: String,
     email: String,
-    followers : Array,
-    following : Array
+    followers: Array,
+    following: Array
 });
 
 var postSchema = mongoose.Schema({
     _id: String,
     username: String,
-    image:String,
+    image: String,
     title: String,
     body: String,
     votes: Number
@@ -65,12 +65,12 @@ var postSchema = mongoose.Schema({
 });
 
 var postVotesSchema = mongoose.Schema({
-  _id: String,
-  username:String,
-  likeCount:Number,
-  dislikeCount:Number,
-  likes : Array,
-  dislikes: Array
+    _id: String,
+    username: String,
+    likeCount: Number,
+    dislikeCount: Number,
+    likes: Array,
+    dislikes: Array
 });
 
 mongoose.plugin(passportLocalMongoose);
@@ -78,7 +78,7 @@ mongoose.plugin(passportLocalMongoose);
 
 var User = usersDB.model("User", usersSchema);
 var Post = postsDB.model("Post", postSchema);
-var PostVotes = postVotesDB.model("PostVote",postVotesSchema);
+var PostVotes = postVotesDB.model("PostVote", postVotesSchema);
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
 
@@ -89,26 +89,26 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/", function (req, res) {
-  if(req.isAuthenticated()) {
+    if(req.isAuthenticated()) {
 
-      var success = true;
-      Post.find({}, function (err, posts) {
-          if(err) {
-              console.log(err);
-              success = false;
-          } else {
-              res.render("feed", {
-                  posts: posts
-              });
-          }
-      });
+        var success = true;
+        Post.find({}, function (err, posts) {
+            if(err) {
+                console.log(err);
+                success = false;
+            } else {
+                res.render("feed", {
+                    posts: posts
+                });
+            }
+        });
 
-      if(!success) {
-          res.send("<h1>Error while loading the posts</h1>")
-      }
-  } else {
-      res.redirect('/authenticate');
-  }
+        if(!success) {
+            res.send("<h1>Error while loading the posts</h1>")
+        }
+    } else {
+        res.redirect('/authenticate');
+    }
 });
 
 
@@ -182,24 +182,15 @@ app.get("/user/:user", function (req, res) {
             if(user === null) {
                 res.send("<h1>Can't find user</h1>");
             } else {
-              var followed = false;
-                User.findOne({username:user.username},function(err,targetUser){
-                  if(err){
-                    console.log(err);
-                  }
-                  else{
-                    console.log(targetUser.followers.includes(req.user.username))
-                    if(targetUser.followers.includes(req.user.username)){
-                      followed = true;
-                    }
-                    else{
-                      followed = false;
-                    }
-                  }
-                })
+                var isFollowed = true;
+                if(user.followers.includes(req.user.username)) {
+                    isFollowed = true;
+                } else {
+                    isFollowed = false;
+                }
                 res.render("user", {
-                    followed : followed,
-                    currentUser : req.user.username,
+                    followed: isFollowed,
+                    currentUser: req.user.username,
                     name: user.name,
                     username: user.username
                 })
@@ -207,6 +198,7 @@ app.get("/user/:user", function (req, res) {
         }
     })
 })
+
 
 app.get("/authenticate", function (req, res) {
 
@@ -227,8 +219,8 @@ app.post('/register', function (req, res) {
             name: req.body.name,
             email: req.body.remail,
             username: req.body.username,
-            followers : [],
-            following : []
+            followers: [],
+            following: []
         },
         password = req.body.password,
         function (err, result) {
@@ -303,7 +295,10 @@ app.post('/login', function (req, res) {
         if(err) {
             console.log(err)
         } else {
-            passport.authenticate('local', { successRedirect:'/', failureRedirect: '/authenticate' })(req, res, function () {
+            passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/authenticate'
+            })(req, res, function () {
                 res.redirect("/")
             });
         }
@@ -329,12 +324,12 @@ app.post("/compose", function (req, res) {
             votes: 0
         });
         var postVote = new PostVotes({
-          _id:key,
-          username: currentUser.username,
-          likeCount:0,
-          dislikeCount:0,
-          likes:[],
-          dislikes:[]
+            _id: key,
+            username: currentUser.username,
+            likeCount: 0,
+            dislikeCount: 0,
+            likes: [],
+            dislikes: []
         })
 
         post.save();
@@ -396,34 +391,32 @@ io.on('connection', function (socket) {
             }
         })
     });
-    socket.on('follow',(data) => {
-      User.findOne({
-        username:data.username
-      },function(err,user){
-        if(err){
-          console.log(err)
-        }
-        else{
+    socket.on('follow', (data) => {
+        User.findOne({
+            username: data.username
+        }, function (err, user) {
+            if(err) {
+                console.log(err)
+            } else {
 
-          user.followers.push(data.currentUser);
-          user.save();
-        }
-      })
+                user.followers.push(data.currentUser);
+                user.save();
+            }
+        })
     })
 
-    socket.on('unfollow',(data) => {
-      User.findOne({
-        username:data.username
-      },function(err,user){
-        if(err){
-          console.log(err)
-        }
-        else{
+    socket.on('unfollow', (data) => {
+        User.findOne({
+            username: data.username
+        }, function (err, user) {
+            if(err) {
+                console.log(err)
+            } else {
 
-          user.followers.remove(data.currentUser);
-          user.save();
-        }
-      })
+                user.followers.remove(data.currentUser);
+                user.save();
+            }
+        })
     })
 })
 
