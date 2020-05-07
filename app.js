@@ -341,7 +341,6 @@ io.on('connection', function (socket) {
             if(err) {
                 console.log(err)
             } else {
-                console.log(doc)
                 doc.votes += 1;
                 doc.save();
             }
