@@ -366,7 +366,6 @@ app.post("/remove/:postID", function (req, res) {
 
 io.on('connection', function (socket) {
     socket.on('upvote', (id) => {
-        console.log(id + " upvoted");
         Post.findOne({
             _id: id
         }, function (err, doc) {
@@ -379,7 +378,6 @@ io.on('connection', function (socket) {
         })
     });
     socket.on('downvote', (id) => {
-        console.log(id + " downvoted");
         Post.findOne({
             _id: id
         }, function (err, doc) {
