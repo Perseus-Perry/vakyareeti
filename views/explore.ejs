@@ -26,6 +26,7 @@
                       <form action="/post/<%=posts[i].id%>">
                         <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
                       </form>
+                      <button type="submit" class="btn btn-sm btn-outline-secondary"><%=posts[i].votes%></button>
                     </div>
                     <% var charPerMin = 1500; %>
                     <% var secTaken = Math.ceil((posts[i].body.length/charPerMin)*60); %>
