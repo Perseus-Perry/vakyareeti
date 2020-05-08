@@ -2,7 +2,7 @@ body {
     padding-top: 56px;
     background-color : #06070d;
     background-repeat: repeat;
-    overflow-x: hidden;
+    overflow-x: hidden
 }
 a{
   color: #F0F8FF;
@@ -15,7 +15,7 @@ a:hover{
   color: #F0F8FF;
   font-family: 'Lora', serif;
 }
-;
+
 .btn:hover{
   background-color: #F0F8FF;
   color : #1abc9c;
@@ -51,7 +51,6 @@ input.search-form {
 }
 .card-body{
   background-color: #1e2228;
-  margin:10px;
 }
 .card-title{
   color: #1abc9c;

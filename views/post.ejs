@@ -1,12 +1,11 @@
 <%- include("partials/header"); -%>
-
 <title><%=title%></title>
 </head>
-<body>
 
+<body>
+<%- include("partials/nav"); -%>
 
 <!-- Page Content -->
-  <img class="img-responsive w-100" src="http://placehold.it/533x400" alt="!title">
   <div class="container">
 
     <div class="row">
@@ -14,9 +13,9 @@
         <div class="col-12">
 
           <div style="white-space: pre-wrap">
-            <h1><%=title%></h1>
-            <h5>By <a href="#"><%=username%></a> DATE</h5>
-            <div class="container">
+            <h1 class="card-title"><%=title%></h1>
+            <h5>By <a href="/user/<%=username%>"><%=username%></a></h5>
+            <div class="card-text">
               <p><%=body%></p>
             </div>
             <h3 class="votes"><%=votes%></h3>
