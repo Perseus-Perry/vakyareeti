@@ -11,3 +11,25 @@ function logInShow() {
   document.getElementById("in-form").hidden = false;
   document.getElementById("up-form").hidden = true;
 }
+
+function saveCookie()
+{
+    var uname = document.getElementById('inputUsername');
+    var password = document.getElementById('inputPassword');
+    var tick = document.getElementById('customCheck1').value;
+    if(tick){
+      document.cookie= "username =" + uname + ";" + "password =" + password;
+    }
+}
+function getCookie()
+{
+    var dat = document.cookie;
+    if(!document.cookie === null){
+      var uname = dat.substring(dat.indexOf("=")+1,dat.indexOf(";"));
+      var pass = dat.substring(dat.lastIndexOf("=")+1);
+
+      document.getElementById('inputUsername').value = uname;
+      document.getElementById('inputPassword').value = pass;
+    }
+
+}
