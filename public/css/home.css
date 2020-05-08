@@ -11,6 +11,9 @@ a:hover{
   color : #1abc9c;
   text-decoration: none;
 }
+hr{
+  border-color: #1abc9c;
+}
 .card-text{
   color: #F0F8FF;
   font-family: 'Lora', serif;
