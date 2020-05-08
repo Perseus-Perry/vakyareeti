@@ -12,34 +12,7 @@
       <div class="col-lg-9">
         <% for(var i=0;i<posts.length;i++) {%>
           <div class="row mb-2">
-            <div class="card flex-md-row mb-4 shadow-sm w-100">
-              <img class="card-img-left flex-auto d-none d-lg-block" height="300" width="400" src="<%=posts[i].image%>">
-              <div class="card-body d-flex flex-column align-items-start">
-                <strong class="d-inline-block mb-2 text-primary">World</strong>
-                <h3 class="mb-0">
-                  <a class="text-dark" href="/post/<%=posts[i]._id%>" > <%=posts[i].title%> </a>
-                </h3>
-                <div class="mb-1 text-muted">By <a href="/user/<%=posts[i].username%>"> <%=posts[i].username%></a></div>
-                <% var body = posts[i].body.substring(0, 100) %>
-                <% body = body.substring(0,body.lastIndexOf(" ")) + " ...Read More" %>
-                <p class="card-text mb-auto"><%=body%></p>
-                <a href="/post/<%=posts[i]._id%>">Continue reading</a>
-
-              <div class="card-footer d-flex flex-column">
-                <div class="row">
-                  <div class="col-8">
-                    <p>Votes: <%=posts[i].votes%></P>
-                    </div>
-                    <div class="col-2">
-                      <a href="#"><i class="fa fa-angle-double-up"></i></a>
-                    </div>
-                    <div class="col-2">
-                      <a href="#"><i class="fa fa-angle-double-down"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
+              <%- include("partials/posts"); -%>
             </div>
             <%}%>
           </div>

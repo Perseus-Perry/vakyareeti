@@ -17,37 +17,12 @@
 
         <% for(var i=0;i<posts.length;i++) {%>
           <div class="col-sm-4 d-flex pb-3">
-            <div class="card" >
-              <div class="card-body" >
-                <h3 class="card-title"><%=posts[i].title%></h3>
-                <h6 class="card-title">By <a href="/user/<%=posts[i].username%>"><%=posts[i].username%></a></h6>
-                <hr>
-                <% var body = posts[i].body.substring(0, 100) %>
-                <% body = body.substring(0,body.lastIndexOf(" ")) %>
-                <p class="card-text"><%=body%><span><a href="/post/<%=posts[i].id%>"> ...Read More</a></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <form action="/post/<%=posts[i].id%>">
-                        <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
-                      </form>
-                    </div>
-                    <% var charPerMin = 1500; %>
-                    <% var secTaken = Math.ceil((posts[i].body.length/charPerMin)*60); %>
-                    <% if(secTaken < 90){%>
-                      <small class="text-muted">Read time : <%=secTaken%> seconds</small>
-                      <%}%>
-                      <%if(secTaken > 90){%>
-                        <%var mins = Math.trunc(secTaken/60); %>
-                        <small class="text-muted">Read time : <%=mins%> minutes</small>
-                        <%}%>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <%}%>
-              </div>
-
-            </div>
-
+              <%- include("partials/posts"); -%>
           </div>
-          <%- include("partials/footer"); -%>
+          <%}%>
+        </div>
+
+      </div>
+
+    </div>
+    <%- include("partials/footer"); -%>
