@@ -2,6 +2,7 @@ body {
     padding-top: 56px;
     background-color : #06070d;
     background-repeat: repeat;
+    overflow-x: hidden
 }
 a{
   color: #F0F8FF;
