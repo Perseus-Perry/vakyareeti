@@ -19,6 +19,10 @@ hr{
   font-family: 'Lora', serif;
 }
 
+*::selection{
+color: #F0F8FF;
+    background-color: #1abc9c;
+}
 .btn:hover{
   background-color: #F0F8FF;
   color : #1abc9c;
