@@ -1,19 +1,19 @@
 <div class="card" >
   <div class="card-body" >
-    <h3 class="card-title"><%=posts[i].title%></h3>
-    <h6 class="by" style="display:inline">by </h6><h6 class="username" style="display:inline"><a href="/user/<%=posts[i].username%>"><%=posts[i].username%></a></h6>
+    <h3 class="card-title"><%=post.title%></h3>
+    <h6 class="by" style="display:inline">by </h6><h6 class="username" style="display:inline"><a href="/user/<%=post.username%>"><%=post.username%></a></h6>
     <hr>
-    <% var body = posts[i].body.substring(0, 100) %>
+    <% var body = post.body.substring(0, 100) %>
     <% body = body.substring(0,body.lastIndexOf(" ")) %>
-    <p class="card-text"><%=body%><span><a href="/post/<%=posts[i].id%>"> ...Read More</a></p>
+    <p class="card-text"><%=body%><span><a href="/post/<%=post.id%>"> ...Read More</a></p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-          <form action="/post/<%=posts[i].id%>">
+          <form action="/post/<%=post.id%>">
             <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
           </form>
         </div>
         <% var charPerMin = 1500; %>
-        <% var secTaken = Math.ceil((posts[i].body.length/charPerMin)*60); %>
+        <% var secTaken = Math.ceil((post.body.length/charPerMin)*60); %>
         <% if(secTaken < 90){%>
           <small class="text-muted">Read time : <%=secTaken%> seconds</small>
           <%}%>
@@ -23,5 +23,4 @@
             <%}%>
           </div>
         </div>
-      </div>
       </div>
