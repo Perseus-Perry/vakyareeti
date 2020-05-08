@@ -3,6 +3,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 <%- include("partials/nav"); -%>
 
 
@@ -45,6 +46,40 @@
                         <small class="text-muted">Read time : <%=secTaken%> seconds</small>
                         <%}%>
                         <%if(secTaken > 90){%>
+=======
+  <%- include("partials/nav"); -%>
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+
+      <%- include("partials/carousel"); -%>
+      <div class="row equal">
+
+        <% for(var i=0;i<posts.length;i++) {%>
+          <div class="col-sm-4 d-flex pb-3">
+            <div class="card" >
+              <div class="card-body" >
+                <h3 class="card-title"><%=posts[i].title%></h3>
+                <% var body = posts[i].body.substring(0, 100) %>
+                <% body = body.substring(0,body.lastIndexOf(" ")) %>
+                <p class="card-text"><%=body%><span><a href="/post/<%=posts[i].id%>"> ...Read More</a></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <form action="/post/<%=posts[i].id%>">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                      </form>
+                      <button type="submit" class="btn btn-sm btn-outline-secondary"><%=posts[i].votes%></button>
+                    </div>
+                    <% var charPerMin = 1500; %>
+                    <% var secTaken = Math.ceil((posts[i].body.length/charPerMin)*60); %>
+                    <% if(secTaken < 90){%>
+
+                      <small class="text-muted">Read time : <%=secTaken%> seconds</small>
+                      <%}%>
+                      <%if(secTaken > 90){%>
+>>>>>>> b899933717ebef7dc7d925a5a0d2a2027251eadf
                         <%var mins = Math.trunc(secTaken/60); %>
                         <small class="text-muted">Read time : <%=mins%> minutes</small>
                         <%}%>
