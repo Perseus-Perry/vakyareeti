@@ -19,116 +19,38 @@
 
   <div class="row">
 
-    <div class="col-lg-3">
-      <%- include("partials/sidebar"); -%>
-    </div>
 
-    <div class="col-lg-9">
-
-      <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-
-          <div class="carousel-item active">
-            <div class="row mb-2">
-              <div class="card flex-md-row mb-4 shadow-sm w-100">
-                <img class="card-img-left flex-auto d-none d-lg-block" src="http://placehold.it/533x400" alt="Card image cap">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-primary">World</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Featured post</a>
-                  </h3>
-                  <div class="mb-1 text-muted">Nov 12</div>
-                  <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#">Continue reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row mb-2">
-              <div class="card flex-md-row mb-4 shadow-sm w-100">
-                <img class="card-img-left flex-auto d-none d-lg-block" src="http://placehold.it/533x400" alt="Card image cap">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-primary">World</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Featured post</a>
-                  </h3>
-                  <div class="mb-1 text-muted">Nov 12</div>
-                  <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#">Continue reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row mb-2">
-              <div class="card flex-md-row mb-4 shadow-sm w-100">
-                <img class="card-img-left flex-auto d-none d-lg-block" src="http://placehold.it/533x400" alt="Card image cap">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-primary">World</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Featured post</a>
-                  </h3>
-                  <div class="mb-1 text-muted">Nov 12</div>
-                  <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#">Continue reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="row">
+    <%- include("partials/carousel"); -%>
+    <div class="row equal">
 
 
       <% for(var i=0;i<posts.length;i++) {%>
-      <div class="col-lg-3 col-md-4 mb-3">
-        <div class="card h-100">
-          <a href="/post/<%=posts[i]._id%>"><img class="card-img-top" src="<%=posts[i].image%>" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title text-uppercase">
-              <a href='/post/<%=posts[i]._id%>'><%=posts[i].title%></a>
-            </h4>
-            <h6 class="card-subtitle">
-              <a href="/user/<%=posts[i].username%>">By <%=posts[i].username%></a>
-            </h6>
-            <% var body = posts[i].body.substring(0, 100) %>
-            <% body = body.substring(0,body.lastIndexOf(" ")) + " ...Read More" %>
-            <a href="/post/<%=posts[i]._id%>"><p class="card-text"><%=body%></p></a>
-          </div>
-          <div class="card-footer">
-            <div class="row">
-              <div class="col-8">
-                <p>Votes: <%=posts[i].votes%></p>
-              </div>
-              <div class="col-2">
-                <a href="#"><i class="fa fa-angle-double-up"></i></a>
-              </div>
-              <div class="col-2">
-                <a href="#"><i class="fa fa-angle-double-down"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div class="col-sm-4 d-flex pb-3">
+                  <div class="card" >
+                    <div class="card-body" >
+                      <h3 class="card-title"><%=posts[i].title%></h3>
+                      <% var body = posts[i].body.substring(0, 100) %>
+                      <% body = body.substring(0,body.lastIndexOf(" ")) %>
+                      <p class="card-text"><%=body%><span><a href="/post/<%=posts[i].id%>"> ...Read More</a></p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <form action="/post/<%=posts[i].id%>">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                          </form>
+                        </div>
+                        <% var charPerMin = 1500; %>
+                        <% var secTaken = Math.ceil((posts[i].body.length/charPerMin)*60); %>
+                        <% if(secTaken < 90){%>
+                        <small class="text-muted">Read time : <%=secTaken%> seconds</small>
+                        <%}%>
+                        <%if(secTaken > 90){%>
+                        <%var mins = Math.trunc(secTaken/60); %>
+                        <small class="text-muted">Read time : <%=mins%> minutes</small>
+                        <%}%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
       <%}%>
     </div>

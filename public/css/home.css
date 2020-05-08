@@ -1,16 +1,25 @@
 
 body {
     padding-top: 56px;
-    background-color : #00263b;
+    background-color : #06070d;
     background-repeat: repeat;
 }
 a{
-  color: #1abc9c;;
+  color: #F0F8FF;
 }
 
 a:hover{
-  color:black;
-  text-decoration: underline;
+  color : #1abc9c;
+  text-decoration: none;
+}
+.card-text{
+  color: #F0F8FF;
+  font-family: 'Lora', serif;
+}
+
+.btn:hover{
+  background-color: #F0F8FF;
+  color : #1abc9c;
 }
 .card-img-top{
       max-width: 100%;
@@ -48,8 +57,14 @@ input.search-form {
   font-weight: bold;
 }
 
+.card-body{
+  background-color: #1e2228;
+}
 .card-title{
-  color:white;
+  color: #1abc9c;
+  font-family: 'Montserrat', sans-serif;
+ font-weight: 300;
+ text-transform: uppercase;
 }
 .sidebar{
   margin-top: 5px;
