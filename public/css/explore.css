@@ -1,3 +1,4 @@
+
 .username{
     color: #F0F8FF;
     font-family: 'Montserrat', sans-serif;
@@ -24,6 +25,8 @@
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   color: #5a5a5a;
 }
 

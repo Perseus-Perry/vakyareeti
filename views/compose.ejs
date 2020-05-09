@@ -1,18 +1,53 @@
 <%- include("partials/header"); -%>
 <title>Compose|VR</title>
+<link rel="stylesheet" href="/css/compose.css">
+<style type="text/css">
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  width: 1px;
+  height: 1px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1abc9c;
+  border: 0px none #ffffff;
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1abb9b;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #03d1b8;
+}
+::-webkit-scrollbar-track {
+  background: #f0ffff;
+  border: 0px solid #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #f0ffff;
+}
+::-webkit-scrollbar-track:active {
+  background: #ffffff;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+</style>
 <head>
 <body>
 <%- include("partials/nav"); -%>
 
-<h1>Compose</h1>
-<form action="/compose" method="post" enctype="image/png">
-  <label>Image URL</label>
-  <input class="form-control" type="text" name="image">
-  <label>Title</label>
-  <input class="form-control" type="text" name="title">
-  <label>Post</label>
-  <textarea class="form-control" name="post" rows="8" cols="80" style="white-space: pre-wrap"></textarea>
+
+<div class="ml-4 mr-4">
+  <h1 class="card-title compose align-center mt-5">- Compose -</h1>
+<form action="/compose" method="post">
+  <input class="form-control card-title title-box" type="text" name="title" placeholder="Your title here">
+  <textarea class="form-control card-text body-box" name="post" rows="8" cols="80" style="white-space: pre-wrap" placeholder="post here"></textarea>
   <br>
-  <button class="btn btn-primary" type="submit" name="submit">Post</button>
+  <button class="btn btn-sm btn-outline-secondary post" type="submit" name="submit">Post</button>
 </form>
+</div>
 <%- include("partials/footer"); -%>

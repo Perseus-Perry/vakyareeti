@@ -1,5 +1,5 @@
 <div class="mb-3">
-<div class="card">
+<div class="card" onclick="window.location.href = '/post/<%=post.id%>'">
   <div class="card-body" >
     <% var creationDate= new Date(post.createdAt.toString()); %>
     <% var currentDate = new Date();%>
@@ -40,11 +40,7 @@
     <p class="card-text"><%=body%><span><a href="/post/<%=post.id%>"> ...Read More</a></p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-          <form class="align-self-end" action="/post/<%=post.id%>">
-            <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">View</button>
-          </form>
-            &nbsp;&nbsp;
-            <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary"><%=post.votes%></button>
+            <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">Votes: <%=post.votes%></button>
         </div>
         <% var charPerMin = 1250; %>
         <% var secTaken = Math.round((post.body.length/charPerMin)*60); %>

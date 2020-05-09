@@ -129,7 +129,7 @@ app.get("/explore", function (req, res) {
     if(req.isAuthenticated()) {
 
         var success = true;
-        Post.find({}, function (err, posts) {
+        Post.find({}).sort('-createdAt').exec(function (err, posts) {
             if(err) {
                 console.log(err);
                 success = false;

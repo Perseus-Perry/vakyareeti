@@ -1,0 +1,51 @@
+
+.compose{
+  text-align: center;
+  font-size: 5rem;
+}
+
+.title-box{
+  color:#1abc9c;
+  background-color: transparent;
+  border-width: 1px;
+  border-color: #1abc9c;
+  font-size: 1.5rem;
+}
+
+.title-box:focus{
+  color:#1abc9c;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.5rem;
+}
+
+.title-box:active{
+  color:#1abc9c;
+}
+
+.body-box{
+  color: #F0F8FF;
+  background-color: transparent;
+  border-width: 1px;
+  border-color: #1abc9c;
+  font-size: 1rem;
+}
+.body-box:focus{
+  color: #F0F8FF;
+  background-color: transparent;
+  outline: none;
+  font-size: 1rem;
+}
+
+.body-box:active{
+  color:#F0F8FF;
+  outline: none;
+}
+
+textarea {
+   resize: none;
+}
+
+.post {
+  font-size: 1.25rem;
+}
