@@ -97,24 +97,22 @@ app.get("/", function (req, res) {
         var postsToRender = [];
         User.findOne({
             username: currentUser
-        }, function (err, user) {
+        },function (err, user) {
 
             if(err) {
                 console.log(err);
             } else {
                     Post.find({
                         username: user.following
-                    }, function (err, posts) {
+                    }).sort('-createdAt').exec(function (err, posts) {
                         if(err) {
                             console.log(err);
                         } else {
                             res.render("feed",{posts:posts})
                         }
                     })
-
-                }
-
-        })
+      }
+    })
 
         if(!success) {
             res.send("<h1>Error while loading the posts</h1>")
@@ -125,12 +123,6 @@ app.get("/", function (req, res) {
 });
 
 
-function renderFeed(res, posts) {
-    console.log(posts)
-    res.render('feed', {
-        posts: posts
-    });
-}
 
 app.get("/explore", function (req, res) {
 
