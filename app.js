@@ -432,7 +432,8 @@ io.on('connection', function (socket) {
                 user.following.push(data.username);
                 user.save();
             }
-        })
+        });
+        socket.emit('status',{username:data.username,currentUser:data.currentUser});
     })
 
     socket.on('unfollow', (data) => {
@@ -457,7 +458,9 @@ io.on('connection', function (socket) {
                 user.following.remove(data.username);
                 user.save();
             }
-        })
+        });
+        socket.emit('status',{username:data.username,currentUser:data.currentUser});
+
     })
 })
 

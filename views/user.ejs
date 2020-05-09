@@ -6,10 +6,10 @@
 <h3 class="card-title"><%=name%></h3>
 <h3 class="card-title"><%=username%></h3>
 <%if(!followed){%>
-<button type="button" class="btn btn-sm btn-outline-secondary" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
+<button type="button" class="btn btn-sm btn-outline-secondary followBtn" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
 <%}%>
 <%if(followed){%>
-<button type="button" class="btn btn-sm btn-outline-secondary" onclick="unfollow('<%=username%>','<%=currentUser%>')">Unfollow</button>
+<button type="button" class="btn btn-sm btn-outline-secondary followBtn" onclick="unfollow('<%=username%>','<%=currentUser%>')">Unfollow</button>
 <%}%>
 
 <script src="/js/socket.io.js"></script>
