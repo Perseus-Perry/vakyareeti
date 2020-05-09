@@ -5,6 +5,7 @@ function follow(username,currentUser){
   socket.emit('follow' , {username:username,currentUser:currentUser});
   document.querySelector(".followBtn").textContent = "Unfollow";
   document.querySelector(".followBtn").setAttribute( "onClick", onclick );
+  location.reload();
 }
 
 function unfollow(username,currentUser){
@@ -12,4 +13,5 @@ function unfollow(username,currentUser){
   socket.emit('unfollow' , {username:username,currentUser:currentUser});
   document.querySelector(".followBtn").textContent = "Follow";
   document.querySelector(".followBtn").setAttribute( "onClick",onclick );
+  location.reload();
 }
