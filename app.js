@@ -447,6 +447,17 @@ io.on('connection', function (socket) {
                 user.save();
             }
         })
+        User.findOne({
+            username: data.currentUser
+        }, function (err, user) {
+            if(err) {
+                console.log(err)
+            } else {
+
+                user.following.remove(data.username);
+                user.save();
+            }
+        })
     })
 })
 
