@@ -14,8 +14,8 @@ function logInShow() {
 
 function saveCookie()
 {
-    var uname = document.getElementById('inputUsername');
-    var password = document.getElementById('inputPassword');
+    var uname = document.getElementById('inputUsername').value;
+    var password = document.getElementById('inputPassword').value;
     var tick = document.getElementById('customCheck1').value;
     if(tick){
       document.cookie= "username =" + uname;
