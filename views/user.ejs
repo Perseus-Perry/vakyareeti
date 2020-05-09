@@ -3,7 +3,14 @@
 <link rel="stylesheet" href="/css/user.css">
 </head>
 <body>
-
+<h3 class="card-title"><%=name%></h3>
+<h3 class="card-title"><%=username%></h3>
+<%if(!followed){%>
+<button type="button" class="btn btn-sm btn-outline-secondary" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
+<%}%>
+<%if(followed){%>
+<button type="button" class="btn btn-sm btn-outline-secondary" onclick="unfollow('<%=username%>','<%=currentUser%>')">Unfollow</button>
+<%}%>
 
 <script src="/js/socket.io.js"></script>
 <script src="/js/follow.js"></script>

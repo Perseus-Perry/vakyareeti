@@ -24,12 +24,14 @@ app.use(express.static("public"));
 app.use(session({
     secret: "kjbdf23bedsni322j5h643nbthj5bkrn3",
     resave: false,
-    saveUninitialied: false
+    saveUninitialized: false
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 const postsDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Posts?retryWrites=true/postsDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -50,7 +52,8 @@ var usersSchema = mongoose.Schema({
     username: String,
     email: String,
     followers: Array,
-    following: Array
+    following: Array,
+    posts: Array
 });
 
 var postSchema = mongoose.Schema({
@@ -66,7 +69,6 @@ var postSchema = mongoose.Schema({
 
 var postVotesSchema = mongoose.Schema({
     _id: String,
-    username: String,
     likeCount: Number,
     dislikeCount: Number,
     likes: Array,
@@ -90,18 +92,29 @@ passport.deserializeUser(User.deserializeUser());
 
 app.get("/", function (req, res) {
     if(req.isAuthenticated()) {
-
+        var currentUser = req.user.username;
         var success = true;
-        Post.find({}, function (err, posts) {
+        var postsToRender = [];
+        User.findOne({
+            username: currentUser
+        }, function (err, user) {
+
             if(err) {
                 console.log(err);
-                success = false;
             } else {
-                res.render("feed", {
-                    posts: posts
-                });
-            }
-        });
+                    Post.find({
+                        username: user.following
+                    }, function (err, posts) {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            res.render("feed",{posts:posts})
+                        }
+                    })
+
+                }
+
+        })
 
         if(!success) {
             res.send("<h1>Error while loading the posts</h1>")
@@ -111,6 +124,13 @@ app.get("/", function (req, res) {
     }
 });
 
+
+function renderFeed(res, posts) {
+    console.log(posts)
+    res.render('feed', {
+        posts: posts
+    });
+}
 
 app.get("/explore", function (req, res) {
 
@@ -315,6 +335,16 @@ app.post("/compose", function (req, res) {
             length: 6,
             numbers: true
         });
+        User.findOne({
+            username: req.user.username
+        }, function (err, user) {
+            if(err) {
+                console.log(err);
+            } else {
+                user.posts.push(key);
+                user.save();
+            }
+        })
         var post = new Post({
             _id: key,
             username: currentUser.username,
@@ -325,7 +355,6 @@ app.post("/compose", function (req, res) {
         });
         var postVote = new PostVotes({
             _id: key,
-            username: currentUser.username,
             likeCount: 0,
             dislikeCount: 0,
             likes: [],
@@ -398,6 +427,17 @@ io.on('connection', function (socket) {
             } else {
 
                 user.followers.push(data.currentUser);
+                user.save();
+            }
+        })
+        User.findOne({
+            username: data.currentUser
+        }, function (err, user) {
+            if(err) {
+                console.log(err)
+            } else {
+
+                user.following.push(data.username);
                 user.save();
             }
         })
