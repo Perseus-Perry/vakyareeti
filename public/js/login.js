@@ -18,7 +18,8 @@ function saveCookie()
     var password = document.getElementById('inputPassword');
     var tick = document.getElementById('customCheck1').value;
     if(tick){
-      document.cookie= "username =" + uname + ";" + "password =" + password;
+      document.cookie= "username =" + uname;
+      document.cookie= "pp =" + password;
     }
 }
 function getCookie()
