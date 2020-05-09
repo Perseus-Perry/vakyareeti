@@ -6,13 +6,16 @@
 <body>
   <%- include("partials/nav"); -%>
 
+
   <div class="container-fluid">
+      <h1 class="card-title mb-0" style="display:block;font-weight:bold">Following</h2>
 
     <div class="row">
 
-      <div class="">
+      <div class="col-md-8">
+              <hr class="mb-5">
         <% for(var i=0;i<posts.length;i++) {%>
-          <div class="row ml-2 mb-2">
+          <div class=" mb-2">
               <%- include("partials/feed-card",{post:posts[i]}); -%>
             </div>
             <%}%>

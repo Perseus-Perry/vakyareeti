@@ -1,5 +1,5 @@
-<div class="col-auto mb-3">
-<div class="card" style="width: 50rem;" >
+<div class="mb-3">
+<div class="card">
   <div class="card-body" >
     <% var creationDate= new Date(post.createdAt.toString()); %>
     <% var currentDate = new Date();%>
@@ -14,6 +14,7 @@
     <div style="clear: both">
 
     <h6 class="by" style="float: left">by <span class="username"><a href="/user/<%=post.username%>"><%=post.username%></a></h6><h6 style="display:inline;margin: 0 45% 0 5px" class="card-title"></h6>
+
     <%if(diffDays>1){%>
     <h6 style="float: right;color: #F0F8FF;"> <%=diffDays%> days ago </h6>
     <%}%>

@@ -1,6 +1,13 @@
+
+
 body{
   padding-top: 100px;
 }
+
+.card{
+  width: 100%;
+}
+
 
 .username{
     color: #F0F8FF;
