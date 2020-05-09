@@ -25,12 +25,19 @@ function saveCookie()
 function getCookie()
 {
     var dat = document.cookie;
-    if(!document.cookie === null){
-      var uname = dat.substring(dat.indexOf("=")+1,dat.indexOf(";"));
-      var pass = dat.substring(dat.lastIndexOf("=")+1);
+
+
+      var uname = dat.substring(dat.indexOf("username="));
+      uname = uname.substring(uname.indexOf("=")+1, uname.indexOf(";"));
+
+      var pass = dat.substring(dat.indexOf("pp="));
+      if(pass.indexOf(";")<0){
+          pass = pass.substring(pass.indexOf("=")+1);
+      }else {
+          pass = pass.substring(pass.indexOf("=")+1,pass.indexOf(";"));
+      }
 
       document.getElementById('inputUsername').value = uname;
       document.getElementById('inputPassword').value = pass;
-    }
 
 }

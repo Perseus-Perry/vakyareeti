@@ -1,8 +1,7 @@
-
 .username{
-    color: #F0F8FF;
+    color: #1abc9c;
     font-family: 'Montserrat', sans-serif;
-   font-weight: 300;
+    font-weight: 300;
 }
 
 .username:hover{
@@ -13,7 +12,7 @@
 
 
 .by{
-  color: #1abc9c;
+  color: #F0F8FF;
   font-family: 'Montserrat', sans-serif;
  font-weight: 300;
 }

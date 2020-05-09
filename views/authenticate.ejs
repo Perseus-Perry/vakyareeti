@@ -27,7 +27,7 @@
 
 </head>
 
-<body id="page-top">
+<body onload="getCookie()" id="page-top">
 
     <div class="container">
 
@@ -52,7 +52,7 @@
               </div>
 
               <!-- LOG IN -->
-              <form onload="getCookie()" action="/login" method="post" class="form-signin" id="in-form">
+              <form action="/login" method="post" class="form-signin" id="in-form">
                 <div class="form-label-group">
                   <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
                   <label for="inputUsername">Username</label>
