@@ -1,20 +1,11 @@
 <%- include("partials/header"); -%>
-
-<title><%=username%>|VR</title>
+<title><%=username%></title>
+<link rel="stylesheet" href="/css/user.css">
 </head>
 <body>
 
-<div style="white-space: pre-wrap">
-<h1>User Page</h1>
-<h6>Name : <%=name%></h6>
-<h6>Username : <%=username%></h6>
-<%if(!followed){%>
-<button onclick="follow('<%=username%>','<%=currentUser%>')" name="followButton">Follow</button>
-<%}%>
-<%if(followed){%>
-    <button onclick="unfollow('<%=username%>','<%=currentUser%>')" name="unfollowButton">Unfollow</button>
-<%}%>
 
 <script src="/js/socket.io.js"></script>
 <script src="/js/follow.js"></script>
+</body>
 <%- include("partials/footer"); -%>

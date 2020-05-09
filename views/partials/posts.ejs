@@ -8,19 +8,20 @@
     <p class="card-text"><%=body%><span><a href="/post/<%=post.id%>"> ...Read More</a></p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-          <form action="/post/<%=post.id%>">
-            <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+          <form class="align-self-end" action="/post/<%=post.id%>">
+            <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">View</button>
           </form>
         </div>
-        <% var charPerMin = 1500; %>
-        <% var secTaken = Math.ceil((post.body.length/charPerMin)*60); %>
+        <% var charPerMin = 1250; %>
+        <% var secTaken = Math.round((post.body.length/charPerMin)*60); %>
         <% if(secTaken < 90){%>
-          <small class="text-muted">Read time : <%=secTaken%> seconds</small>
+          <small class="align-self-end text-muted">Read time : <%=secTaken%> seconds</small>
           <%}%>
           <%if(secTaken > 90){%>
-            <%var mins = Math.trunc(secTaken/60); %>
-            <small class="text-muted">Read time : <%=mins%> minutes</small>
+            <%var mins = Math.round(secTaken/60); %>
+            <small class="align-self-end text-muted">Read time : <%=mins%> minutes</small>
             <%}%>
+
           </div>
         </div>
       </div>
