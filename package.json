@@ -13,6 +13,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.17.1",
+    "imgur": "^0.3.1",
+    "imgur-file-upload": "^1.1.0",
     "jimp": "^0.10.3",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.10",
