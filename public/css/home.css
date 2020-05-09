@@ -58,10 +58,18 @@ input.search-form {
 }
 .card-body{
   background-color: #1e2228;
-  
+
 }
 .card-title{
   color: #1abc9c;
+  font-family: 'Montserrat', sans-serif;
+ font-weight: 300;
+ text-transform: uppercase;
+}
+
+
+.muted-card-title{
+  color: #999999;
   font-family: 'Montserrat', sans-serif;
  font-weight: 300;
  text-transform: uppercase;

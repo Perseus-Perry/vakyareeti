@@ -14,11 +14,17 @@
 
       <div class="col-md-8">
               <hr class="mb-5">
-        <% for(var i=0;i<posts.length;i++) {%>
-          <div class=" mb-2">
-              <%- include("partials/feed-card",{post:posts[i]}); -%>
-            </div>
-            <%}%>
+        <%if(posts.length===0){%>
+          <h5 class="muted-card-title">You are not following anyone yet</h5>
+        <%}%>
+        <%if(posts.length!=0){%>
+          <% for(var i=0;i<posts.length;i++) {%>
+            <div class=" mb-2">
+                <%- include("partials/feed-card",{post:posts[i]}); -%>
+              </div>
+              <%}%>
+        <%}%>
+
           </div>
 
           <div class="col-lg-3">
