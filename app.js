@@ -169,6 +169,7 @@ app.get("/post/:postID", function (req, res) {
             if(post === null) {
                 res.send(" <h1> Can't find post</h1>");
             } else {
+              if(typeof req.user !== 'undefined'){
                 res.render("post", {
                     currentUser: req.user.username,
                     id: post._id,
@@ -177,6 +178,17 @@ app.get("/post/:postID", function (req, res) {
                     body: post.body,
                     votes: post.votes
                 });
+              }
+              else{
+                res.render("post", {
+                    currentUser: "",
+                    id: post._id,
+                    username: post.username,
+                    title: post.title,
+                    body: post.body,
+                    votes: post.votes
+                });
+              }
             }
         }
     });
