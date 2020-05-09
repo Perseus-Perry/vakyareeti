@@ -1,9 +1,10 @@
 <%- include("partials/header"); -%>
+<%- include('partials/nav'); -%>
 <title><%=username%></title>
 <link rel="stylesheet" href="/css/user.css">
 </head>
 <body>
-<h3 class="card-title"><%=name%></h3>
+<h3 class="card-title mt-5"><%=name%></h3>
 <h3 class="card-title"><%=username%></h3>
 <%if(!followed){%>
 <button type="button" class="btn btn-sm btn-outline-secondary followBtn" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
