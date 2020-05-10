@@ -21,6 +21,14 @@
 
 <body>
     <%- include("partials/nav"); -%>
+
+    <div class="button-bar">
+      <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+      <br>
+      <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+      <br>
+      <button class="btn btn-outline-danger" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+    </div>
   <div class="container">
 
     <div class="row">
