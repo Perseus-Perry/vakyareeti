@@ -1,9 +1,6 @@
-.title-main{
-  color: #1abc9c;
-  font-family: 'Montserrat', sans-serif;
- font-weight: 300;
+body {
+    padding-top: 56px;
 }
-.text-main{
-  color: #F0F8FF;
-  font-family: 'Lora', serif;
+.sidebar{
+  margin-top: 10px;
 }
