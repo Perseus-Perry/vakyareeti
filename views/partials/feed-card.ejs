@@ -35,12 +35,16 @@
     <%}%>
     </div>
     <hr>
-    <% var body = post.body.substring(0, 100) %>
+    <% var body = post.body.substring(0, 400) %>
     <% body = body.substring(0,body.lastIndexOf(" ")) %>
     <p class="card-text"><%=body%><span><a href="/post/<%=post.id%>"> ...Read More</a></p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
+            <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">View Post</button>
             <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">Votes: <%=post.votes%></button>
+            <button type="submit" class="align-self-end btn btn-sm btn-outline-warning">Save</button>
+            &nbsp;&nbsp;
+            <button onclick="sharePost('<%=post.id%>')" class="align-self-end btn btn-sm btn-outline-secondary"><i class="fa fa-share"></i></button>
         </div>
         <% var charPerMin = 1250; %>
         <% var secTaken = Math.round((post.body.length/charPerMin)*60); %>

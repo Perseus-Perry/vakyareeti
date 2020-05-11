@@ -1,36 +1,80 @@
-<%- include("partials/header"); -%>
-<title><%=title%></title>
-<link rel="stylesheet" href="/css/post.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:wght@300|Montserrat" rel="stylesheet">
+  <link rel="shortcut icon" type="/img/png" href="fav.png" />
+
+  <title><%=title%></title>
+
+  <link href="/css/post.css" rel="stylesheet">
+
 </head>
 
-<body onload="ini()">
-<%- include("partials/nav"); -%>
+<body>
+    <%- include("partials/nav"); -%>
 
-<!-- Page Content -->
+    <div class="button-bar">
+      <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+      <br>
+      <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+      <br>
+      <button class="btn btn-outline-danger" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+    </div>
   <div class="container">
 
     <div class="row">
 
-        <div class="col-12">
+      <div class="col-lg-8">
 
-          <div style="white-space: pre-wrap">
-            <h1 class="title-main"><%=title%></h1>
-            <h5>By <a href="/user/<%=username%>"><%=username%></a></h5>
-            <div class="text-main">
-              <p><%=body%></p>
-            </div>
-            <h3 class="votes"><%=votes%></h3>
-            <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
-            <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
-          </div>
+        <h1 class="mt-4"><%=title%></h1>
 
-        </div>
-        <!-- /.col-lg-9 -->
+        <p class="lead">
+          by
+          <a href="/user/<%=username%>"><%=username%></a>
+        </p>
+
+        <hr>
+
+        <p>Posted on January 1, 2019 at 12:00 PM</p>
+
+        <hr>
+
+        <img class="img-fluid rounded" src="http://placehold.it/800x450" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+
+        <p style="white-space: pre-wrap"><%=body%></p>
+
+        <hr>
+        <p class="votes"><%=votes%></p>
+        <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+        <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+        <button class="btn btn-outline-primary" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
 
       </div>
-      <!-- /.row -->
+
+      <div class="col-md-4">
+        <%- include("partials/sidebar"); -%>
+      </div>
 
     </div>
-    <script src="/js/socket.io.js"></script>
-    <script src="/js/vote.js"></script>
-    <%- include("partials/footer"); -%>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <script src="/js/socket.io.js"></script>
+  <script src="/js/vote.js"></script>
+  <%- include("partials/footer"); -%>
