@@ -1,0 +1,90 @@
+body{
+  padding-bottom: 100px;
+}
+
+h1{
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.subsection{
+  background-color: #1e2228;
+  width: 500px;
+  height: 50px;
+}
+
+.profile-pic{
+  border-radius: 50%;
+  max-width: 15%;
+}
+
+.banner-pic{
+  max-width: 35%;
+}
+
+.username-text{
+  margin: auto 0;
+  float:left;
+}
+
+.username-div{
+  position:relative;
+  left:10%;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.username-box{
+  padding-left: 10px;
+  border-radius: 25px;
+  color: #F0F8FF;
+  background-color: transparent;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+  font-size: 1rem;
+}
+.username-box:focus{
+  color: #F0F8FF;
+  background-color: transparent;
+  outline: none;
+  font-size: 1rem;
+}
+
+.username-box:active{
+  color:#F0F8FF;
+  outline: none;
+}
+
+.bio-box{
+  padding: 10px;
+  color: #F0F8FF;
+  background-color: transparent;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+  font-size: 1rem;
+}
+
+.bio-box:focus{
+  color: #F0F8FF;
+  background-color: transparent;
+  outline: none;
+  font-size: 1rem;
+}
+
+.bio-box:active{
+  color:#F0F8FF;
+  outline: none;
+}
+
+.disable-div{
+  position: relative;
+  left:30%;
+}

@@ -148,6 +148,14 @@ app.get("/explore", function (req, res) {
 
 });
 
+app.get('/account',function(req,res){
+  if(!req.isAuthenticated()){
+    res.redirect("/authenticate");
+  }
+  else{
+    res.render('account');
+  }
+})
 
 app.get("/compose", function (req, res) {
     if(!req.isAuthenticated()) {
