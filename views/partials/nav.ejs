@@ -1,39 +1,43 @@
-<!-- navbar -->
+<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="/">Vakyareeti</a>
-  <div class="container-fluid text-right">
-    <div class="navbar-nav ml-auto">
-          <form class="form-inline">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
-              </div>
-            </div>
-          </form>
-        <div class="nav-item navbar-text">
-          <a class="nav-link" href="/">
-            Feed
-          </a>
+  <div class="container">
+    <a id="brandbar" class="navbar-brand" href="/">Vakyareeti</a>
+    <form class="form-inline">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span role="button" class="input-group-text btn-outline-primary" id="basic-addon1"><a href="#" onClick="searchActive()"> <i class="fa fa-search"></i> </a></span>
+          <input id="searchbar" type="text" class="form-control form-sm" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" hidden>
         </div>
-        <div class="nav-item navbar-text">
-          <a class="nav-link" href="/explore">Explore
-            <span class="sr-only">(current)</span>
-          </a>
-        </div>
-        <div class="nav-item dropdown navbar-text">
+      </div>
+    </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Feed</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/explore">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/saved">Saved</a>
+        </li>
+        <div id="nav-drop" class="nav-item dropdown navbar-text">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-user"></i> User
           </button>
           <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" onclick="toggleMode()" href="/account">Account</a>
+            <a class="dropdown-item" href="/account">Account</a>
             <a class="dropdown-item" onclick="toggleMode()" href="#">Toggle</a>
             <a class="dropdown-item" href="/compose">Compose</a>
             <a class="dropdown-item" href="/saved">Saved</a>
             <a class="dropdown-item" href="/logout">Logout</a>
           </div>
         </div>
-      </div>
+      </ul>
+    </div>
   </div>
 </nav>

@@ -1,8 +1,13 @@
-$("a.sic").click(function () {
-    $(".search-toggle").animate({
-        width: 'toggle'
-    });
-});
+var hideState=false;
+function searchActive()
+{
+      document.getElementById('searchbar').hidden=hideState;
+      document.getElementById('brandbar').hidden=!hideState;
+      document.getElementById('feed-link').hidden=!hideState;
+      document.getElementById('explore-link').hidden=!hideState;
+      document.getElementById('nav-drop').hidden=!hideState;
+      hideState=!hideState;
+}
 
 function sharePost(id){
     console.log("ran");
