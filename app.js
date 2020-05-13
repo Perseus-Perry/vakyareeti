@@ -219,17 +219,26 @@ app.get("/user/:user", function (req, res) {
                 } else {
                     isFollowed = false;
                 }
-                res.render("user", {
-                    followed: isFollowed,
-                    currentUser: req.user.username,
-                    name: user.name,
-                    username: user.username
+                Post.find({username:userToLookFor},function(err,posts){
+                  res.render("user", {
+                      followed: isFollowed,
+                      currentUser: req.user.username,
+                      name: user.name,
+                      username: user.username,
+                      posts: posts
+                  })
                 })
+
             }
         }
     })
 })
 
+function getPosts(username){
+  Posts.find({username:username},function(err,posts){
+    return posts;
+  })
+}
 
 app.get("/authenticate", function (req, res) {
 

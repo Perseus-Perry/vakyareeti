@@ -17,6 +17,8 @@ hr{
 .card-text{
   color: #F0F8FF;
   font-family: 'Lora', serif;
+  letter-spacing: 0.025rem;
+  word-spacing: 0.05rem;
 }
 
 *::selection{

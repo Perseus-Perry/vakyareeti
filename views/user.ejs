@@ -1,6 +1,7 @@
 <%- include("partials/header"); -%>
 <title>Vakyareeti</title>
 <link rel="stylesheet" href="/css/explore.css">
+<link rel="stylesheet" href="/css/user.css">
 </head>
 
 <body>
@@ -15,10 +16,10 @@
       </div>
       <div class="col-6">
         <%if(!followed){%>
-        <button type="button" class="btn btn-sm btn-outline-secondary followBtn" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
+        <button type="button" class="btn btn-outline-primary followBtn" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
         <%}%>
         <%if(followed){%>
-        <button type="button" class="btn btn-sm btn-outline-secondary followBtn" onclick="unfollow('<%=username%>','<%=currentUser%>')">Unfollow</button>
+        <button type="button" class="btn btn-outline-primary followBtn" onclick="unfollow('<%=username%>','<%=currentUser%>')">Unfollow</button>
         <%}%>
       </div>
     </div>
