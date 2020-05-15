@@ -291,6 +291,19 @@ app.get("/admin", function (req, res) {
 app.post("/admin", function (req, res) {
     var searched = req.body.searchQuery;
     if(req.body.optradio === "author") {
+      if(searched===""){
+        Post.find({}, function (err, docs) {
+            if(err) {
+                console.log(err)
+                res.send("<h1>error</h1>");
+            } else {
+                res.render("admin", {
+                    posts: docs
+                })
+            }
+        })
+      }
+      else{
         Post.find({
             username: searched
         }, function (err, docs) {
@@ -303,7 +316,21 @@ app.post("/admin", function (req, res) {
                 })
             }
         })
+      }
     } else {
+      if(searched===""){
+        Post.find({}, function (err, docs) {
+            if(err) {
+                console.log(err)
+                res.send("<h1>error</h1>");
+            } else {
+                res.render("admin", {
+                    posts: docs
+                })
+            }
+        })
+      }
+      else{
         Post.find({
             title: searched
         }, function (err, docs) {
@@ -317,7 +344,7 @@ app.post("/admin", function (req, res) {
             }
         })
 
-    }
+    }}
 })
 
 app.post('/login', function (req, res) {
