@@ -7,17 +7,22 @@
 <body>
     <%- include("partials/nav"); -%>
 
+    <% if(currentUser === ''){%>
+
+    <%} %>
+    <% if (currentUser !== ''){%>
     <div class="button-bar">
       <div>
-      <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+      <button class="btn btn-outline-success" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
       </div>
       <div>
       <p class="votes"><%=votes%></p>
       </div>
       <div>
-      <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+      <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
       </div>
     </div>
+    <%}%>
   <div class="container">
 
     <div class="row">
@@ -43,12 +48,26 @@
         <p class="card-text" style="white-space: pre-wrap"><%=body%></p>
 
         <hr>
+
         <div style="text-align: center">
-        <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
-        <span class="votes"><%=votes%></span>
-        <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
-        &nbsp;&nbsp;
-        <button class="btn btn-outline-primary" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+          <% if(currentUser === ""){%>
+            <button disabled class="btn btn-outline-success" ><i class="fa fa-angle-double-up"></i></button>
+            <span id='votecountbottom' class="votes"><%=votes%></span>
+            <button disabled class="btn btn-outline-danger"><i class="fa fa-angle-double-down"></i></button>
+            &nbsp;&nbsp;
+            <button class="btn btn-outline-warning"><i class="fa fa-bookmark"></i></button>
+            <button class="btn btn-outline-primary" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+            <p class="text-muted"> Login to vote </p>
+          <%} %>
+          <% if (currentUser !== ""){%>
+            <button class="btn btn-outline-success" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+            <span id='votecountbottom' class="votes"><%=votes%></span>
+            <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+            &nbsp;&nbsp;
+            <button class="btn btn-outline-warning"><i class="fa fa-bookmark"></i></button>
+            <button class="btn btn-outline-primary" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+          <%}%>
+
         </div>
 
 
