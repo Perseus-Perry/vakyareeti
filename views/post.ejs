@@ -29,7 +29,10 @@
 
         <hr>
 
+        <% var date = createdAt.getDate().toString() +"/"+ createdAt.getMonth().toString()+"/"+createdAt.getFullYear().toString() ; %>
+        <% var time = createdAt.getHours().toString() +":"+createdAt.getMinutes().toString()+":"+createdAt.getSeconds().toString(); %>
         <p class="card-text text-muted">Posted on January 1, 2019 at 12:00 PM</p>
+        <p class="card-text text-muted">Posted on <%date%> at <%time%></p>
 
         <hr>
 
