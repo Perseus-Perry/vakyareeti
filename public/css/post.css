@@ -6,8 +6,15 @@ body {
 }
 .button-bar{
   position: fixed;
-  top: 50%;
+  top: 25%;
+  left:20px;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+.votes{
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-size: 22px;
+  text-align: center;
 }
