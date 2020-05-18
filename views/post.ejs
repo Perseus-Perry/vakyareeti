@@ -8,11 +8,15 @@
     <%- include("partials/nav"); -%>
 
     <div class="button-bar">
+      <div>
       <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
-      <br>
+      </div>
+      <div>
+      <p class="votes"><%=votes%></p>
+      </div>
+      <div>
       <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
-      <br>
-      <button class="btn btn-outline-danger" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+      </div>
     </div>
   <div class="container">
 
@@ -29,10 +33,8 @@
 
         <hr>
 
-        <% var date = createdAt.getDate().toString() +"/"+ createdAt.getMonth().toString()+"/"+createdAt.getFullYear().toString() ; %>
-        <% var time = createdAt.getHours().toString() +":"+createdAt.getMinutes().toString()+":"+createdAt.getSeconds().toString(); %>
+
         <p class="card-text text-muted">Posted on January 1, 2019 at 12:00 PM</p>
-        <p class="card-text text-muted">Posted on <%date%> at <%time%></p>
 
         <hr>
 
@@ -44,10 +46,14 @@
         <p class="card-text" style="white-space: pre-wrap"><%=body%></p>
 
         <hr>
-        <p class="votes"><%=votes%></p>
+        <div style="text-align: center">
         <button class="btn btn-outline-primary" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
-        <button class="btn btn-outline-primary" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+        <span class="votes"><%=votes%></span>
+        <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+        &nbsp;&nbsp;
         <button class="btn btn-outline-primary" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
+        </div>
+
 
       </div>
 

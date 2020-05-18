@@ -6,8 +6,14 @@ body {
 }
 .button-bar{
   position: fixed;
-  top: 50%;
+  top: 25%;
+  left:20px;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+.votes{
+  color: white;
+  font-size: 20px;
+  text-align: center;
 }
