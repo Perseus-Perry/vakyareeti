@@ -53,7 +53,7 @@ var usersSchema = mongoose.Schema({
     followers: Array,
     following: Array,
     posts: Array,
-    saved:Array
+    savedPosts:Array
 });
 
 var postSchema = mongoose.Schema({
@@ -168,9 +168,26 @@ app.get("/compose", function (req, res) {
 
 app.get("/saved",function(req,res){
   if(!req.isAuthenticated()) {
+
       res.redirect('/authenticate')
   } else {
-      res.render("saved");
+    User.findOne({username:req.user.username},function(err,user){
+      if(err){
+        console.log(err);
+      }
+      else{
+        Post.find({_id:user.savedPosts},function(err,docs){
+          if(err)
+          {
+            console.log(err);
+          }
+          else{
+            res.render("saved",{posts:docs});
+          }
+        })
+      }
+    })
+
   }
 })
 
@@ -424,16 +441,17 @@ app.post("/compose", function (req, res) {
 app.post("/save/:postID",function(req,res){
 
     var currentUser = req.user.username;
-    User.find({username:currentUser},function(err,user){
+    User.findOne({username:currentUser},function(err,user){
       if(err){
         console.log(err);
       }
       else{
-        console.log(user);
-        user.saved.push(req.params.postID);
+        user.savedPosts.push(req.params.postID);
         user.save();
       }
+      res.status(204).send();
     })
+
 
 })
 
