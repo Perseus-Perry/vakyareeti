@@ -210,7 +210,8 @@ app.get("/post/:postID", function (req, res) {
                     username: post.username,
                     title: post.title,
                     body: post.body,
-                    votes: post.votes
+                    votes: post.votes,
+                    createdAt : post.createdAt
                 });
               }
               else{

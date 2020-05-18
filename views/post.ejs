@@ -28,8 +28,10 @@
         </p>
 
         <hr>
-
-        <p class="card-text text-muted">Posted on January 1, 2019 at 12:00 PM</p>
+        <% var datetime = createdAt; %>
+        <% var date = datetime.getDate().toString() +"/"+ datetime.getMonth().toString()+"/"+datetime.getFullYear().toString() ; %>
+        <% var time = datetime.getHours().toString() +":"+datetime.getMinutes().toString(); %>
+        <p class="card-text text-muted">Posted on <%=date%> at <%=time%></p>
 
         <hr>
 
