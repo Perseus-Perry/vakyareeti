@@ -13,7 +13,8 @@ body {
   transform: translateY(-50%);
 }
 .votes{
+  font-family: 'Montserrat', sans-serif;
   color: white;
-  font-size: 20px;
+  font-size: 22px;
   text-align: center;
 }
