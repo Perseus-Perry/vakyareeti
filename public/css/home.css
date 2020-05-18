@@ -1,6 +1,6 @@
 body {
     padding-top: 56px;
-    background-color : #06070d;
+    background-color : #13161c;
     background-repeat: repeat;
     overflow-x: hidden
 }
@@ -53,6 +53,8 @@ input.search-form {
 .search-toggle {
     float: right;
 }
+
+
 .navbar {
   background-image: url("/img/login-bg.jpg");
   color : black;

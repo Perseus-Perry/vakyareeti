@@ -41,8 +41,9 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
             <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">View Post</button>
-            <button type="submit" class="align-self-end btn btn-sm btn-outline-secondary">Votes: <%=post.votes%></button>
+            <form action="/save/<%=post.id%>" method="post">
             <button type="submit" class="align-self-end btn btn-sm btn-outline-warning">Save</button>
+            </form>
             &nbsp;&nbsp;
             <button onclick="sharePost('<%=post.id%>')" class="align-self-end btn btn-sm btn-outline-secondary"><i class="fa fa-share"></i></button>
         </div>

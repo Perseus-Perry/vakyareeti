@@ -52,7 +52,8 @@ var usersSchema = mongoose.Schema({
     email: String,
     followers: Array,
     following: Array,
-    posts: Array
+    posts: Array,
+    saved:Array
 });
 
 var postSchema = mongoose.Schema({
@@ -165,6 +166,14 @@ app.get("/compose", function (req, res) {
     }
 });
 
+app.get("/saved",function(req,res){
+  if(!req.isAuthenticated()) {
+      res.redirect('/authenticate')
+  } else {
+      res.render("saved");
+  }
+})
+
 
 app.get("/post/:postID", function (req, res) {
     var postToLookFor = req.params.postID;
@@ -234,11 +243,6 @@ app.get("/user/:user", function (req, res) {
     })
 })
 
-function getPosts(username){
-  Posts.find({username:username},function(err,posts){
-    return posts;
-  })
-}
 
 app.get("/authenticate", function (req, res) {
 
@@ -260,7 +264,9 @@ app.post('/register', function (req, res) {
             email: req.body.remail,
             username: req.body.username,
             followers: [],
-            following: []
+            following: [],
+            posts:[],
+            saved:[]
         },
         password = req.body.password,
         function (err, result) {
@@ -415,6 +421,21 @@ app.post("/compose", function (req, res) {
     }
 })
 
+app.post("/save/:postID",function(req,res){
+
+    var currentUser = req.user.username;
+    User.find({username:currentUser},function(err,user){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(user);
+        user.saved.push(req.params.postID);
+        user.save();
+      }
+    })
+
+})
 
 app.post("/remove/:postID", function (req, res) {
     Post.findOne({
