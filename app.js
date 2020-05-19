@@ -191,6 +191,10 @@ app.get("/saved",function(req,res){
   }
 })
 
+app.get("/message", function(req, res){
+  res.render("message");
+})
+
 
 app.get("/post/:postID", function (req, res) {
     var postToLookFor = req.params.postID;
@@ -221,7 +225,8 @@ app.get("/post/:postID", function (req, res) {
                     username: post.username,
                     title: post.title,
                     body: post.body,
-                    votes: post.votes
+                    votes: post.votes,
+                    createdAt : post.createdAt
                 });
               }
             }
