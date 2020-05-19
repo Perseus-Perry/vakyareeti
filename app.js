@@ -191,6 +191,10 @@ app.get("/saved",function(req,res){
   }
 })
 
+app.get("/message", function(req, res){
+  res.render("message");
+})
+
 
 app.get("/post/:postID", function (req, res) {
     var postToLookFor = req.params.postID;
