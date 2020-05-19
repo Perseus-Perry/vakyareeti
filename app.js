@@ -101,35 +101,27 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/", function (req, res) {
-    if(req.isAuthenticated()) {
-        var currentUser = req.user.username;
-        var success = true;
-        var postsToRender = [];
-        User.findOne({
-            username: currentUser
-        },function (err, user) {
+  if(req.isAuthenticated()) {
 
-            if(err) {
-                console.log(err);
-            } else {
-                    Post.find({
-                        username: user.following
-                    }).sort('-createdAt').exec(function (err, posts) {
-                        if(err) {
-                            console.log(err);
-                        } else {
-                            res.render("feed",{posts:posts})
-                        }
-                    })
+      var success = true;
+      Post.find({}).sort('-createdAt').exec(function (err, posts) {
+          if(err) {
+              console.log(err);
+              success = false;
+          } else {
+              res.render("feed", {
+                  posts: posts
+              });
+          }
+      });
+
+      if(!success) {
+          res.send("<h1>Error while loading the posts</h1>")
       }
-    })
+  } else {
+      res.redirect('/authenticate');
+  }
 
-        if(!success) {
-            res.send("<h1>Error while loading the posts</h1>")
-        }
-    } else {
-        res.redirect('/authenticate');
-    }
 });
 
 
