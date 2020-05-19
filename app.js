@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+mongoose.set('useCreateIndex', false);
 const postsDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Posts?retryWrites=true/postsDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -81,7 +81,7 @@ var postVotesSchema = mongoose.Schema({
 });
 
 var codesSchema = mongoose.Schema({
-    _code:String
+    code:String
 });
 
 mongoose.plugin(passportLocalMongoose);
@@ -346,6 +346,12 @@ app.get("/admin", function (req, res) {
     })
 })
 
+
+app.get("/message" , function(req,res){
+    res.render("message");
+})
+
+
 app.post("/admin", function (req, res) {
     var searched = req.body.searchQuery;
     if(req.body.optradio === "author") {
@@ -590,6 +596,18 @@ io.on('connection', function (socket) {
         });
         socket.emit('status',{username:data.username,currentUser:data.currentUser});
 
+    })
+
+    socket.on('generate', (data) => {
+      var key = randkey.get({
+          length: 6,
+          numbers: true
+      });
+      var code = new Code({
+        code : key
+      });
+
+      code.save();
     })
 })
 
