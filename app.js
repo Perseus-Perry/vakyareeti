@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', false);
+mongoose.set('useCreateIndex', true);
 const postsDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Posts?retryWrites=true/postsDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true
