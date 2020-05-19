@@ -46,6 +46,11 @@ const postVotesDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJ
     useUnifiedTopology: true
 });
 
+const codesDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Codes?retryWrites=true/codesDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 var usersSchema = mongoose.Schema({
     name: String,
     username: String,
@@ -75,12 +80,17 @@ var postVotesSchema = mongoose.Schema({
     dislikes: Array
 });
 
+var codesSchema = mongoose.Schema({
+    _code:String
+});
+
 mongoose.plugin(passportLocalMongoose);
 
 
 var User = usersDB.model("User", usersSchema);
 var Post = postsDB.model("Post", postSchema);
 var PostVotes = postVotesDB.model("PostVote", postVotesSchema);
+var Code = codesDB.model("Code",codesSchema);
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
 
@@ -191,10 +201,6 @@ app.get("/saved",function(req,res){
   }
 })
 
-app.get("/message", function(req, res){
-  res.render("message");
-})
-
 
 app.get("/post/:postID", function (req, res) {
     var postToLookFor = req.params.postID;
@@ -225,8 +231,7 @@ app.get("/post/:postID", function (req, res) {
                     username: post.username,
                     title: post.title,
                     body: post.body,
-                    votes: post.votes,
-                    createdAt : post.createdAt
+                    votes: post.votes
                 });
               }
             }
@@ -282,26 +287,50 @@ app.get('/logout', function (req, res) {
 });
 
 app.post('/register', function (req, res) {
-    User.register({
-            name: req.body.name,
-            email: req.body.remail,
-            username: req.body.username,
-            followers: [],
-            following: [],
-            posts:[],
-            saved:[]
-        },
-        password = req.body.password,
-        function (err, result) {
-            if(err) {
-                console.log(err)
-                res.redirect('/authenticate')
-            } else {
-                passport.authenticate('local')(req, res, function () {
-                    res.redirect("/")
-                })
-            }
-        })
+  Code.findOne({code:req.body.invite},function(err,doc){
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log(doc);
+      if(doc===null){
+        res.redirect("/");
+      }
+      else{
+        User.register({
+                name: req.body.name,
+                email: req.body.remail,
+                username: req.body.username,
+                followers: [],
+                following: [],
+                posts:[],
+                saved:[]
+            },
+            password = req.body.password,
+            function (err, result) {
+                if(err) {
+                    console.log(err)
+                    res.redirect('/authenticate')
+                } else {
+                    Code.findOne({code:req.body.invite},function(err,doc){
+                      if(err){
+                        console.log(err);
+                      }
+                      else{
+                        doc.remove();
+                        passport.authenticate('local')(req, res, function () {
+                            res.redirect("/")
+                        })
+                      }
+                    })
+
+                }
+            })
+      }
+    }
+  })
+
+
 });
 
 app.get("/admin", function (req, res) {
@@ -385,7 +414,7 @@ app.post('/login', function (req, res) {
         password: req.body.password
     });
 
- 
+
 
     req.login(user, function (err) {
         if(err) {
