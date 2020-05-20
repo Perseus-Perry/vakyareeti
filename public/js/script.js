@@ -9,13 +9,15 @@ function searchActive()
       hideState=!hideState;
 }
 
-function sharePost(){
+function share(){
 var url= document.location.href;
-cons canonicalElement = document.querySelector('link[rel=canonical]');
+const canonicalElement = document.querySelector('link[rel=canonical]');
 if (canonicalElement !== null){
   url = canonicalElement.href;
 }
+
+console.log(navigator.share);
 navigator.share({
-  url:url;
+  url:url
 })
 }
