@@ -326,7 +326,7 @@ app.post('/register', function (req, res) {
 });
 
 app.get("/admin", function (req, res) {
-    res.render("admin", {
+    res.render("admin/saerch", {
         posts: {
             _id: "7WmRfK",
             username: "naruto1715",

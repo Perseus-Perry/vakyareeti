@@ -9,26 +9,6 @@
 
 <body>
 
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="searchPosts-tab" data-toggle="tab" href="#searchPosts" role="tab" aria-controls="searchPosts" aria-selected="true">Search Posts</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="invite-tab" data-toggle="tab" href="#invite" role="tab" aria-controls="invite" aria-selected="false">Invite</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="stats-tab" data-toggle="tab" href="#stats" role="tab" aria-controls="stats" aria-selected="false">Stats</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="msg-tab" data-toggle="tab" href="#msg" role="tab" aria-controls="msg" aria-selected="false">Messages</a>
-    </li>
-
-  </ul>
-
-  <div class="tab-content">
-    <div class="tab-pane active" id="searchPosts" role="tabpanel" aria-labelledby="searchPosts-tab">
-
-      <!-- SEARCH -->
       <div class="container">
         <form action="/admin" method="post">
           <div class="form-group">
@@ -110,61 +90,6 @@
         <%}%>
 
       </diV>
-
-    <!-- SEARCH -->
-    </div>
-
-    <div class="tab-pane" id="invite" role="tabpanel" aria-labelledby="invite-tab">
-
-      <!-- INVITE -->
-      <div class="container">
-          <div class="form-group">
-            <label for="usr">Enter Code</label>
-            <input type="text" class="form-control" id="invite-code">
-          </div>
-          <button class="btn btn-outline-primary">Update</button>
-          <button class="btn btn-outline-primary" onclick="generate()">Generate new code</button>
-          <button class="btn btn-outline-primary">List All</button>
-      </div>
-      <br>
-      <div class="container">
-        <div class="row bg-light">
-          <div class="col-10">
-          Code
-          </div>
-          <div class="col-2">
-
-          </div>
-        </div>
-
-        <% for(var i=0;i<posts.length;i++){ %>
-        <% var datetime = posts[i].createdAt; %>
-        <% var date = datetime.getDate().toString() +"/"+ datetime.getMonth().toString()+"/"+datetime.getFullYear().toString() ; %>
-        <% var time = datetime.getHours().toString() +":"+datetime.getMinutes().toString()+":"+datetime.getSeconds().toString(); %>
-        <!--Entry div-->
-        <div class="row">
-          <div class="col-1">
-            <%=date%>
-          </div>
-          <div class="col-2">
-            <a class="btn btn-outline-dark btn-sm" href="#" role="button">Revoke</a>
-          </div>
-        </div>
-        <%}%>
-
-      </diV>
-    </div>
-    <!--INVITE -->
-
-    <div class="tab-pane" id="stats" role="tabpanel" aria-labelledby="stats-tab">
-        STATS
-    </div>
-    <div class="tab-pane" id="msg" role="tabpanel" aria-labelledby="msg-tab">
-      SEND MESSAGE
-    </div>
-  </div>
-
-
 
 <!-- Bootstrap core JavaScript -->
 <script src="/js/socket.io.js"></script>

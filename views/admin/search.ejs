@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="fav.png" />
+
+  <!-- Bootstrap Core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+
+      <div class="container">
+        <form action="/admin" method="post">
+          <div class="form-group">
+            <label for="usr">Search Posts</label>
+            <input type="text" class="form-control" id="usr" name="searchQuery">
+          </div>
+          <div class="row">
+            <div class="col-3">
+
+              <div class="radio">
+                <label><input type="radio" value="author" name="optradio" checked>By Author</label>
+              </div>
+              <div class="radio">
+                <label><input type="radio" value="title" name="optradio">By Title</label>
+              </div>
+            </div>
+            <div class="col-9">
+              <button type="submit" class="btn btn-outline-primary">Search</button>
+              <button onclick="showFeatured()" class="btn btn-outline-warning">Show Featured</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container">
+        <div class="row bg-light">
+          <div class="col-1">
+            Date
+          </div>
+          <div class="col-1">
+            Time
+          </div>
+          <div class="col-1">
+            username
+          </div>
+          <div class="col-1">
+            ID
+          </div>
+          <div class="col-4">
+            Title
+          </div>
+          <div class="col-2">
+            Votes
+          </div>
+          <div class="col-2">
+
+          </div>
+        </div>
+
+        <% for(var i=0;i<posts.length;i++){ %>
+        <% var datetime = posts[i].createdAt; %>
+        <% var date = datetime.getDate().toString() +"/"+ datetime.getMonth().toString()+"/"+datetime.getFullYear().toString() ; %>
+        <% var time = datetime.getHours().toString() +":"+datetime.getMinutes().toString()+":"+datetime.getSeconds().toString(); %>
+        <!--Entry div-->
+        <div class="row">
+          <div class="col-1">
+            <%=date%>
+          </div>
+          <div class="col-1">
+            <%= time %>
+          </div>
+          <div class="col-1">
+            <%= posts[i].username %>
+          </div>
+          <div class="col-1">
+            <%= posts[i].id %>
+          </div>
+          <div class="col-4">
+            <%= posts[i].title %>
+          </div>
+          <div class="col-2">
+            <%= posts[i].votes %>
+          </div>
+          <div class="col-2">
+            <a class="btn btn-outline-dark btn-sm" href="#" role="button">Feature</a>
+            <a class="btn btn-outline-danger btn-sm" href="#" role="button">Delete</a>
+          </div>
+        </div>
+        <%}%>
+
+      </diV>
+
+<!-- Bootstrap core JavaScript -->
+<script src="/js/socket.io.js"></script>
+<script src="/js/admin.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

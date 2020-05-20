@@ -1,0 +1,49 @@
+<html>
+<head>
+  <link rel="shortcut icon" type="image/png" href="fav.png" />
+
+  <!-- Bootstrap Core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="form-group">
+      <label for="usr">Enter Code</label>
+      <input type="text" class="form-control" id="invite-code">
+    </div>
+    <button class="btn btn-outline-primary">Update</button>
+    <button class="btn btn-outline-primary" onclick="generate()">Generate new code</button>
+    <button class="btn btn-outline-primary">List All</button>
+</div>
+<br>
+<div class="container">
+  <div class="row bg-light">
+    <div class="col-10">
+    Code
+    </div>
+    <div class="col-2">
+
+    </div>
+  </div>
+
+  <% for(var i=0;i<posts.length;i++){ %>
+  <% var datetime = posts[i].createdAt; %>
+  <% var date = datetime.getDate().toString() +"/"+ datetime.getMonth().toString()+"/"+datetime.getFullYear().toString() ; %>
+  <% var time = datetime.getHours().toString() +":"+datetime.getMinutes().toString()+":"+datetime.getSeconds().toString(); %>
+  <!--Entry div-->
+  <div class="row">
+    <div class="col-1">
+      <%=date%>
+    </div>
+    <div class="col-2">
+      <a class="btn btn-outline-dark btn-sm" href="#" role="button">Revoke</a>
+    </div>
+  </div>
+  <%}%>
+
+</diV>
+
+</body>
+</html>
