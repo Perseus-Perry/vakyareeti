@@ -9,16 +9,13 @@ function searchActive()
       hideState=!hideState;
 }
 
-function sharePost(id){
-    console.log("ran");
-    const shareData = {
-    title: 'MDN',
-    text: 'Learn web development on MDN!',
-    url: 'https://developer.mozilla.org',
-  };
-  if(navigator.canShare(shareData)){
-    navigator.share(shareData);
-  }else{
-    console.log("unsupported");
-  }
+function sharePost(){
+var url= document.location.href;
+cons canonicalElement = document.querySelector('link[rel=canonical]');
+if (canonicalElement !== null){
+  url = canonicalElement.href;
+}
+navigator.share({
+  url:url;
+})
 }
