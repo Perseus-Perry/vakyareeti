@@ -45,7 +45,7 @@
             <button type="submit" class="align-self-end btn btn-sm btn-outline-warning">Save</button>
             </form>
             &nbsp;&nbsp;
-            <button onclick="sharePost('<%=post.id%>')" class="align-self-end btn btn-sm btn-outline-secondary"><i class="fa fa-share"></i></button>
+          <button onclick="dlgOpn()" class="align-self-end btn btn-sm btn-outline-secondary"><i class="fa fa-share"></i></button>
         </div>
         <% var charPerMin = 1250; %>
         <% var secTaken = Math.round((post.body.length/charPerMin)*60); %>

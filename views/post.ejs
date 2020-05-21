@@ -58,15 +58,22 @@
             &nbsp;&nbsp;
             <button class="btn btn-outline-warning"><i class="fa fa-bookmark"></i></button>
             <button class="btn btn-outline-primary" onclick="sharePost('<%=id%>')"><i class="fa fa-share"></i></button>
-            <p class="text-muted"> Login to vote </p>
+            <p class="text-muted"> Login to vote, sahre or save </p>
           <%} %>
           <% if (currentUser !== ""){%>
-            <button class="btn btn-outline-success" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
-            <span id='votecountbottom' class="votes"><%=votes%></span>
-            <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
-            &nbsp;&nbsp;
-            <button class="btn btn-outline-warning"><i class="fa fa-bookmark"></i></button>
-            <button class="btn btn-outline-primary" onclick="dlgOpn()" class="modal-open"><i class="fa fa-share"></i></button>
+            <div class="btn-group">
+              <button class="btn btn-outline-success" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
+              &nbsp;
+              <span id='votecountbottom' class="votes"><%=votes%></span>
+              &nbsp;
+              <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
+              &nbsp;&nbsp;
+              <<form action="/save/<%id%>" method="post">
+                <button class="btn btn-outline-warning"><i class="fa fa-bookmark"></i></button>
+              </form>
+              &nbsp;
+              <button class="btn btn-outline-primary" onclick="dlgOpn()" class="modal-open"><i class="fa fa-share"></i></button>
+            </div>
           <%}%>
 
         </div>
@@ -76,6 +83,7 @@
 
       <div class="col-md-4">
         <%- include("partials/sidebar"); -%>
+
       </div>
 
     </div>
