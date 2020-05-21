@@ -21,3 +21,12 @@ navigator.share({
   url:url
 })
 }
+
+//share dialogue
+
+function dlgOpn(){
+document.querySelector("#overlay").style.visibility = "visible";
+};
+function dlgClose(){
+document.querySelector("#overlay").style.visibility = "hidden";
+};

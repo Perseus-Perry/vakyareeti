@@ -14,6 +14,17 @@ body {
     background-size: 400px;
  }
 
+ .errorSpace{
+   visibility: hidden;
+   margin-top: 10px;
+   border: 2px solid red;
+   border-radius: 5px;
+   color: white;
+   font-size: 13px;
+   background: rgba(255, 0, 0, 0.4);
+ }
+
+
 .card-signin {
   background-color: #00263b;
   border: 0;
