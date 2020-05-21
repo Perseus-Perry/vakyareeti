@@ -9,19 +9,6 @@ function searchActive()
       hideState=!hideState;
 }
 
-function share(){
-var url= document.location.href;
-const canonicalElement = document.querySelector('link[rel=canonical]');
-if (canonicalElement !== null){
-  url = canonicalElement.href;
-}
-
-console.log(navigator.share);
-navigator.share({
-  url:url
-})
-}
-
 //share dialogue
 
 function dlgOpn(){
@@ -30,3 +17,9 @@ document.querySelector("#overlay").style.visibility = "visible";
 function dlgClose(){
 document.querySelector("#overlay").style.visibility = "hidden";
 };
+
+function checkMobile() {
+  if (window.screen.width < 500){
+    document.getElementById('button-bar').hidden=true;
+  }
+}
