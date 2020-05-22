@@ -6,7 +6,10 @@
 <body>
   <%- include("partials/nav"); -%>
   <%- include("partials/share"); -%>
+
+  <% if(currentUser !== ""){%>
   <%- include("partials/new"); -%>
+  <%}%>
 
   <div class="container-fluid">
       <h1 class="card-title mb-0" style="display:block;font-weight:bold">Feed</h1>
