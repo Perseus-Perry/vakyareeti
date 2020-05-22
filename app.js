@@ -335,16 +335,21 @@ app.post('/register', function (req, res) {
 });
 
 app.get("/admin", function (req, res) {
-    res.render("admin/saerch", {
-        posts: {
-            _id: "7WmRfK",
-            username: "naruto1715",
-            title: "Validators",
-            body: "Dates have two built-in validators: min and max. These validators will...",
-            createdAt: '2020 - 05 - 06 T18: 01: 32.100 + 00: 00',
-            updatedAt: '2020 - 05 - 06 T18: 01: 32.100 + 00: 00'
-        }
-    })
+    res.render("admin/search",)
+})
+
+app.get("/admin-invite", function (req, res) {
+  Code.find({},function(err,docs){
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(docs);
+      res.render("admin/invite",{
+        codes:docs
+      })
+    }
+  })
 })
 
 
@@ -352,8 +357,19 @@ app.get("/message" , function(req,res){
     res.render("message");
 })
 
+app.get('/revoke/:code',function(req,res){
+  var codeToRemove = req.params.code;
+  Code.deleteOne({code:codeToRemove},function(err){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.redirect("/admin-invite")
+    }
+  })
+})
 
-app.post("/admin", function (req, res) {
+app.post("/admin-search", function (req, res) {
     var searched = req.body.searchQuery;
     if(req.body.optradio === "author") {
       if(searched===""){
@@ -411,6 +427,21 @@ app.post("/admin", function (req, res) {
 
     }}
 })
+
+app.post("/admin-invite",function(req,res){
+    Code.find({},function(err,docs){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(docs);
+        res.render("admin/invite",{
+          codes:docs
+        })
+      }
+    })
+})
+
 
 app.post('/login', function (req, res) {
 
@@ -609,6 +640,8 @@ io.on('connection', function (socket) {
       });
 
       code.save();
+      var destination = '/admin-invite';
+      socket.emit('redirect', destination);
     })
 })
 

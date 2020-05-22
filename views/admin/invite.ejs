@@ -6,16 +6,13 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="padding-top:50px;">
 
 <div class="container">
-    <div class="form-group">
-      <label for="usr">Enter Code</label>
-      <input type="text" class="form-control" id="invite-code">
-    </div>
-    <button class="btn btn-outline-primary">Update</button>
     <button class="btn btn-outline-primary" onclick="generate()">Generate new code</button>
+    <form type="submit" action="/admin-invite" style="display:inline" method="post">
     <button class="btn btn-outline-primary">List All</button>
+  </form>
 </div>
 <br>
 <div class="container">
@@ -28,22 +25,22 @@
     </div>
   </div>
 
-  <% for(var i=0;i<posts.length;i++){ %>
-  <% var datetime = posts[i].createdAt; %>
-  <% var date = datetime.getDate().toString() +"/"+ datetime.getMonth().toString()+"/"+datetime.getFullYear().toString() ; %>
-  <% var time = datetime.getHours().toString() +":"+datetime.getMinutes().toString()+":"+datetime.getSeconds().toString(); %>
+  <% if(codes!==null){ %>
+  <% for(var i=0;i<codes.length;i++){ %>
   <!--Entry div-->
   <div class="row">
     <div class="col-1">
-      <%=date%>
+      <%=codes[i].code%>
     </div>
     <div class="col-2">
-      <a class="btn btn-outline-dark btn-sm" href="#" role="button">Revoke</a>
+      <a class="btn btn-outline-dark btn-sm" href="/revoke/<%=codes[i].code%>" role="button">Revoke</a>
     </div>
   </div>
   <%}%>
+  <%}%>
 
 </diV>
-
+<script src="/js/socket.io.js"></script>
+<script src="/js/admin.js"></script>
 </body>
 </html>
