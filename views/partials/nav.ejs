@@ -4,7 +4,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  <% if(currentUser !== ""){%>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -29,4 +29,8 @@
     </ul>
     <button onclick="window.location.href = '/message'" class="btn btn-outline-warning"><i class="fa fa-envelope"></i></button>
   </div>
+  <%}%>
+  <% if(currentUser === ""){%>
+      <button class="btn btn-warning" onclick=" window.location.href ='/authenticate'">Log In</button>
+  <%}%>
 </nav>

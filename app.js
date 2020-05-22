@@ -101,7 +101,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/", function (req, res) {
-  if(req.isAuthenticated()) {
+
 
       var success = true;
       Post.find({}).sort('-createdAt').exec(function (err, posts) {
@@ -109,18 +109,26 @@ app.get("/", function (req, res) {
               console.log(err);
               success = false;
           } else {
+
+            if(typeof req.user !== 'undefined'){
               res.render("feed", {
+                  currentUser: req.user.username,
                   posts: posts
               });
+            }
+            else{
+              res.render("feed", {
+                  currentUser: "",
+                  posts: posts
+              });
+            }
+
           }
       });
 
       if(!success) {
           res.send("<h1>Error while loading the posts</h1>")
       }
-  } else {
-      res.redirect('/authenticate');
-  }
 
 });
 
