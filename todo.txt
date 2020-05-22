@@ -1,8 +1,8 @@
 0. Sample Todo Item
 0. Sample checked Todo Item xxx
+
 1. Share Button -
   Frontend completed, make the backend
-2. Mobile friendly post page
-3. Invite codes list
-4. Light Theme
-5. ADMIN PAGE FUCKED UP, REPAIR ASAP
+2. Mobile friendly post page xxx
+3. Light Theme
+4. ADMIN PAGE FUCKED UP, REPAIR ASAP
