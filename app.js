@@ -172,7 +172,9 @@ app.get("/compose", function (req, res) {
     if(!req.isAuthenticated()) {
         res.redirect('/authenticate')
     } else {
-        res.render("compose");
+        res.render("compose",{
+          currentUser: req.user.username
+        });
     }
 });
 
