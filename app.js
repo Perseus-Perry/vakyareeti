@@ -194,7 +194,10 @@ app.get("/saved",function(req,res){
             console.log(err);
           }
           else{
-            res.render("saved",{posts:docs});
+            res.render("saved",{
+              posts:docs,
+              currentUser: req.user.username
+            });
           }
         })
       }
@@ -356,7 +359,9 @@ app.get("/admin-invite", function (req, res) {
 
 
 app.get("/message" , function(req,res){
-    res.render("message");
+    res.render("message,{
+      currentUser: req.user.username
+    }");
 })
 
 app.get('/revoke/:code',function(req,res){
