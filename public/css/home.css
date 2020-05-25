@@ -1,39 +1,46 @@
 :root{
   --bgcol: #13161c;
-  --acol:  #F0F8FF;
+  --col1:  #F0F8FF;
+  --col2: #1abc9c;
+}
+[data-theme="light"]
+{
+  --bgcol: white;
+  --col1:  brown;
+  --col2: brown;
 }
 
 
 body {
     padding-top: 56px;
-    background-color : #13161c;
+    background-color : var(--bgcol);
     background-repeat: repeat;
     overflow-x: hidden
 }
 a{
-  color: #F0F8FF;
+  color: var(--col1);
 }
 a:hover{
-  color : #1abc9c;
+  color : var(--col2) ;
   text-decoration: none;
 }
 hr{
-  border-color: #1abc9c;
+  border-color: var(--col2);
 }
 .card-text{
-  color: #F0F8FF;
+  color: var(--col1);
   font-family: 'Lora', serif;
   letter-spacing: 0.025rem;
   word-spacing: 0.05rem;
 }
 
 *::selection{
-color: #F0F8FF;
-    background-color: #1abc9c;
+color: var(--col1);
+    background-color: var(--col2);
 }
 .btn:hover{
-  background-color: #F0F8FF;
-  color : #1abc9c;
+  background-color: var(--col1);
+  color : var(--col2);
 }
 
 .card{
@@ -45,25 +52,10 @@ color: #F0F8FF;
 .list-group-item{
   background: rgba(128,128,128,0.1) !important;
 }
-a.sic {
-    position: relative;
-    left: 300px;
-    z-index: 10000;
-}
-input.search-form {
-    padding: 10px;
-}
-#searchbar {
-    width: 300px;
-}
-.search-toggle {
-    float: right;
-}
 
 
 .navbar {
   background-image: url("/img/login-bg.jpg");
-  color : black;
   font-weight: bold;
 }
 .card-body{
@@ -71,14 +63,14 @@ input.search-form {
 
 }
 .card-title{
-  color: #1abc9c;
+  color: var(--col2);
   font-family: 'Montserrat', sans-serif;
  font-weight: 300;
  text-transform: capitalize;
 }
 
 .card-subtitle{
-  color: #F0F8FF;
+  color: var(--col1);
   font-family: 'Montserrat', sans-serif;
  font-weight: 300;
 }

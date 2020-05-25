@@ -4,14 +4,12 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:wght@300|Montserrat" rel="stylesheet">
 </head>
 
-<body onload="checkMobile()">
+<body>
     <%- include("partials/nav"); -%>
     <%- include("partials/share"); -%>
 
-    <% if(currentUser === ''){%>
 
-    <%} %>
-    <% if (currentUser !== ''){%>
+    <% if (currentUser !== '' && !isMobile){%>
     <div id="button-bar" class="button-bar">
       <div>
       <button class="btn btn-outline-success" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
@@ -68,7 +66,7 @@
               &nbsp;
               <button class="btn btn-outline-danger" id='downvote' onclick="downvote('<%=id%>')"><i class="fa fa-angle-double-down"></i></button>
               &nbsp;&nbsp;
-              <<form action="/save/<%id%>" method="post">
+              <form action="/save/<%id%>" method="post">
                 <button class="btn btn-outline-warning"><i class="fa fa-bookmark"></i></button>
               </form>
               &nbsp;
@@ -83,7 +81,12 @@
 
       <div class="col-md-4">
         <%- include("partials/sidebar"); -%>
-
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+              <input type="checkbox" id="checkbox" />
+              <div class="slider round"></div>
+          </label>
+        </div>
       </div>
 
     </div>

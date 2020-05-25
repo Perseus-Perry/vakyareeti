@@ -15,6 +15,8 @@ const http = require('http').Server(app);
 const Jimp = require('jimp');
 const server = require('http').createServer(app);
 const io = require('socket.io')(http);
+const mobile = require('is-mobile');
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
@@ -113,13 +115,15 @@ app.get("/", function (req, res) {
             if(typeof req.user !== 'undefined'){
               res.render("feed", {
                   currentUser: req.user.username,
-                  posts: posts
+                  posts: posts,
+                  isMobile: mobile()
               });
             }
             else{
               res.render("feed", {
                   currentUser: "",
-                  posts: posts
+                  posts: posts,
+                  isMobile: mobile()
               });
             }
 
@@ -173,7 +177,8 @@ app.get("/compose", function (req, res) {
         res.redirect('/authenticate')
     } else {
         res.render("compose",{
-          currentUser: req.user.username
+          currentUser: req.user.username,
+          isMobile: mobile()
         });
     }
 });
@@ -196,7 +201,8 @@ app.get("/saved",function(req,res){
           else{
             res.render("saved",{
               posts:docs,
-              currentUser: req.user.username
+              currentUser: req.user.username,
+              isMobile: mobile()
             });
           }
         })
@@ -226,7 +232,8 @@ app.get("/post/:postID", function (req, res) {
                     title: post.title,
                     body: post.body,
                     votes: post.votes,
-                    createdAt : post.createdAt
+                    createdAt : post.createdAt,
+                    isMobile: mobile()
                 });
               }
               else{
@@ -237,7 +244,8 @@ app.get("/post/:postID", function (req, res) {
                     title: post.title,
                     body: post.body,
                     votes: post.votes,
-                    createdAt : post.createdAt
+                    createdAt : post.createdAt,
+                    isMobile: mobile()
                 });
               }
             }
@@ -359,9 +367,14 @@ app.get("/admin-invite", function (req, res) {
 
 
 app.get("/message" , function(req,res){
+  if(!req.isAuthenticated()) {
+
+      res.redirect('/authenticate')
+  } else {
     res.render("message",{
       currentUser: req.user.username
     });
+  }
 })
 
 app.get('/revoke/:code',function(req,res){
