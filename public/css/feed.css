@@ -1,27 +1,16 @@
-
-
-body{
-  padding-top: 100px;
-}
-
 .card{
   width: 100%;
 }
-
-
 .username{
     color: #F0F8FF;
     font-family: 'Montserrat', sans-serif;
    font-weight: 300;
 }
-
 .username:hover{
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   color: #1abc9c;
 }
-
-
 .by{
   color: white;
   font-family: 'Montserrat', sans-serif;

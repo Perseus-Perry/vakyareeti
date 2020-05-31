@@ -1,3 +1,16 @@
+if(screen.width<500){
+  document.getElementById('bottombar').hidden = false;
+  document.getElementById('topbar').hidden= true;
+  document.getElementById('body').classList.add("mob");
+  console.log("mobile")
+  }
+  else{
+    document.getElementById('bottombar').hidden = true;
+    document.getElementById('topbar').hidden= false;
+    document.getElementById('body').classList.add("notMob");
+    console.log("not mobile")
+  }
+
 var hideState=false;
 function searchActive()
 {
