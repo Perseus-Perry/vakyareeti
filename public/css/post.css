@@ -4,9 +4,6 @@
 [data-theme]{
   --col1: black;
 }
-body {
-    padding-top: 56px;
-}
 .sidebar{
   margin-top: 30px;
 }

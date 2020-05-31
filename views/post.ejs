@@ -9,8 +9,8 @@
     <%- include("partials/share"); -%>
 
 
-    <% if (currentUser !== '' && !isMobile){%>
-    <div id="button-bar" class="button-bar">
+    <% if (currentUser !== ''){%>
+    <div id="button-bar" class="nonMob-only button-bar">
       <div>
       <button class="btn btn-outline-success" id='upvote' onclick="upvote('<%=id%>')"><i class="fa fa-angle-double-up"></i></button>
       </div>
@@ -22,6 +22,7 @@
       </div>
     </div>
     <%}%>
+
   <div class="container">
 
     <div class="row">

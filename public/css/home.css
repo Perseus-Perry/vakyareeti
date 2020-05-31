@@ -10,15 +10,17 @@
   --col2: brown;
 }
 body {
+    margin-top:10px;
+    margin-bottom: 10px;
     background-color : var(--bgcol);
     background-repeat: repeat;
     overflow-x: hidden
 }
 .notMob{
-    margin-top: 56px;
+    margin-top: 70px !important;
 }
 .mob{
-  margin-bottom: 26px;
+  margin-bottom: 40px !important;
 }
 
 a{
