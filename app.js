@@ -365,6 +365,10 @@ app.get("/admin-invite", function (req, res) {
   })
 })
 
+app.get("/admin-post", function (req, res) {
+  res.render('admin/post')
+})
+
 
 app.get("/message" , function(req,res){
   if(!req.isAuthenticated()) {
@@ -529,6 +533,47 @@ app.post("/compose", function (req, res) {
 
         res.redirect('/');
     }
+})
+
+app.post("/admin-post", function (req, res) {
+
+        if(req.body.userExists){
+        var key = randkey.get({
+            length: 6,
+            numbers: true
+        });
+        User.findOne({
+            username: req.body.username
+        }, function (err, user) {
+            if(err) {
+                console.log(err);
+            } else {
+                user.posts.push(key);
+                user.save();
+            }
+        })
+      }
+        var post = new Post({
+            _id: key,
+            username: req.body.username,
+            image: '',
+            title: req.body.title,
+            body: req.body.post,
+            votes: 0
+        });
+        var postVote = new PostVotes({
+            _id: key,
+            likeCount: 0,
+            dislikeCount: 0,
+            likes: [],
+            dislikes: []
+        })
+
+        post.save();
+        postVote.save();
+
+        res.redirect('/');
+
 })
 
 app.post("/save/:postID",function(req,res){
