@@ -206,8 +206,15 @@ app.get('/account', function(req, res) {
     if(!req.isAuthenticated()) {
       res.redirect("/authenticate");
     } else {
-      res.render('account',{currentUser:req.user.username});
-    }
+      User.findOne({username:req.user.username},function (err,doc){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(doc)
+          res.render('account',{currentUser:req.user.username,url:doc.profilePic,bio:doc.bio});
+        }
+      })    }
   }
 
 )
@@ -226,6 +233,43 @@ app.get("/compose", function(req, res) {
   }
 
 );
+
+app.post("/update-picture/" , function(req,res){
+  if(!req.isAuthenticated()) {
+    res.redirect('/authenticate')
+  } else {
+     var new_url = req.body.url;
+     User.findOne({username:req.user.username},function(err,doc){
+       if(err){
+         console.log(err)
+       }
+       else{
+         doc.profilePic = new_url;
+         doc.save();
+         res.redirect('/account')
+       }
+     })
+  }
+})
+
+app.post('/update-bio',function(req,res){
+  if(!req.isAuthenticated()) {
+    res.redirect('/authenticate')
+  }
+  else{
+    var new_bio = req.body.bio;
+    User.findOne({username:req.user.username},function(err,doc){
+      if(err){
+        console.log(err)
+      }
+      else{
+        doc.bio = new_bio;
+        doc.save();
+        res.redirect('/account')
+      }
+    })
+  }
+})
 
 app.get("/saved", function(req, res) {
     if(!req.isAuthenticated()) {
@@ -365,6 +409,8 @@ app.get("/user/:user", function(req, res) {
                     currentUser: currentUser,
                     name: user.name,
                     username: user.username,
+                    profilePic : user.profilePic,
+                    bio : user.bio,
                     posts: posts
                   }
 
@@ -406,7 +452,7 @@ app.post('/register', function(req, res) {
           email: req.body.remail,
           username: req.body.username,
           bio: "",
-          profilePic: "",
+          profilePic: "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png",
           followers: [],
           following: [],
           posts: [],
