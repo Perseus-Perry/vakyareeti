@@ -15,7 +15,6 @@ body {
  }
 
  .errorSpace{
-   visibility: hidden;
    margin-top: 10px;
    border: 2px solid red;
    border-radius: 5px;
