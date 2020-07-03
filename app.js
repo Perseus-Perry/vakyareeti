@@ -206,7 +206,7 @@ app.get('/account', function(req, res) {
     if(!req.isAuthenticated()) {
       res.redirect("/authenticate");
     } else {
-      res.render('account');
+      res.render('account',{currentUser:req.user.username});
     }
   }
 
