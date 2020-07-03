@@ -1,0 +1,13 @@
+.name{
+    margin-bottom: 0em;
+    font-size: 26pt;
+    font-weight: 500;
+}
+.uname{
+    margin-top: 0em;
+    font-size: 11pt;
+    color: white;
+}
+.bio{
+    margin-top: 8px;
+}

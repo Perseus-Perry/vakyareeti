@@ -2,29 +2,45 @@
 <title>Vakyareeti</title>
 <link rel="stylesheet" href="/css/explore.css">
 <link rel="stylesheet" href="/css/user.css">
+
+
 </head>
 
 <body id="body">
   <%- include("partials/nav"); -%>
 
   <div class="container-fluid">
+   
+   
     <div class="row">
-      <div class="col-3">
-        <img class="img-fluid rounded-circle" src="http://placehold.it/200x200">
-
+      <div class="col-4">
+        <div class="dp">
+          <img height="200" width="200" class="img-fluid" src="https://silv3rh4t.github.io/img/Yaduvanshi.jpg">
+        </div>
       </div>
-      <div class="col-9">
-        <h4 class="card-title mt-5"><%=name%></h4>
-        <span class="card-title">(<%=username%>)</span><br>
-        <%if(!followed){%>
-        <button type="button" class="align-self-end btn btn-sm btn-outline-secondary followBtn" onclick="follow('<%=username%>','<%=currentUser%>')">Follow</button>
-        <%}%>
-        <%if(followed){%>
-        <button type="button" class="align-self-end btn btn-sm btn-outline-secondary followBtn" onclick="unfollow('<%=username%>','<%=currentUser%>')">Unfollow</button>
-        <%}%>
+      <div class="col-8">
+        <span class="card-title name"><%=name%></span>
+        <span class="uname">[<%=username%>]</span>
+
+        <br>
+        <button type="button" class="btn btn-sm btn-outline-secondary followBtn"  
+          <%if(!followed){%>
+             onclick="follow('<%=username%>','<%=currentUser%>')">
+             Follow
+           <%}%>
+           <%if(followed){%>
+              onclick="unfollow('<%=username%>','<%=currentUser%>')">
+              Unfollow
+           <%}%>
+        </button>
+      </div>
+      <div class="bio">
+        Hey, I am a writer
       </div>
     </div>
+
     <hr>
+
     <div class="row">
       <div class="row equal">
         <% for(var i=0;i<posts.length;i++) {%>
@@ -39,4 +55,6 @@
   </div>
   <script src="/js/socket.io.js"></script>
   <script src="/js/follow.js"></script>
+
+
 <%- include("partials/footer"); -%>
