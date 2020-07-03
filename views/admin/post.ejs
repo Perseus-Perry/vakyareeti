@@ -1,0 +1,22 @@
+<%- include("../partials/header"); -%>
+<title>Compose|VR</title>
+<link rel="stylesheet" href="/css/compose.css">
+<link href="/css/post.css" rel="stylesheet">
+<head>
+<body id="body">
+
+
+<div class="ml-4 mr-4">
+  <h1 class="card-title compose align-center mt-5">Admin Post</h1>
+<form action="/admin-post" method="post">
+  <label class="card-text">username exists : </label>
+  <input class="" type="checkbox" name="userExists">
+  <input class="form-control card-title title-box" type="text" name="username" placeholder="username">
+  <input class="form-control card-title title-box" type="text" name="title" placeholder="Your title here">
+  <textarea class="lined form-control card-text body-box" name="post" rows="8" cols="80" style="white-space: pre-wrap" placeholder="post here"></textarea>
+  <br>
+  <button class="btn btn-sm btn-outline-secondary post" type="submit" name="submit">Post</button>
+</form>
+</div>
+
+<%- include("../partials/footer"); -%>

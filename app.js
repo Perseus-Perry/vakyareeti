@@ -214,6 +214,7 @@ app.get("/saved",function(req,res){
 
 
 app.get("/post/:postID", function (req, res) {
+
     var postToLookFor = req.params.postID;
     Post.findOne({
         _id: postToLookFor
@@ -224,7 +225,7 @@ app.get("/post/:postID", function (req, res) {
             if(post === null) {
                 res.send(" <h1> Can't find post</h1>");
             } else {
-              if(typeof req.user !== 'undefined'){
+              if(req.isAuthenticated()){
                 res.render("post", {
                     currentUser: req.user.username,
                     id: post._id,
@@ -251,10 +252,19 @@ app.get("/post/:postID", function (req, res) {
             }
         }
     });
+
 });
 
 app.get("/user/:user", function (req, res) {
     var userToLookFor = req.params.user;
+    var currentUser;
+    if(req.isAuthenticated()){
+     currentUser = req.user.username;
+    }
+    else{
+      currentUser = '';
+    }
+
     User.findOne({
         username: userToLookFor
     }, function (err, user) {
@@ -265,15 +275,16 @@ app.get("/user/:user", function (req, res) {
                 res.send("<h1>Can't find user</h1>");
             } else {
                 var isFollowed = true;
-                if(user.followers.includes(req.user.username)) {
+                if(user.followers.includes(currentUser)) {
                     isFollowed = true;
                 } else {
                     isFollowed = false;
                 }
                 Post.find({username:userToLookFor},function(err,posts){
+
                   res.render("user", {
                       followed: isFollowed,
-                      currentUser: req.user.username,
+                      currentUser: currentUser,
                       name: user.name,
                       username: user.username,
                       posts: posts
@@ -363,6 +374,10 @@ app.get("/admin-invite", function (req, res) {
       })
     }
   })
+})
+
+app.get("/admin-post", function (req, res) {
+  res.render('admin/post')
 })
 
 
@@ -529,6 +544,47 @@ app.post("/compose", function (req, res) {
 
         res.redirect('/');
     }
+})
+
+app.post("/admin-post", function (req, res) {
+
+        if(req.body.userExists){
+        var key = randkey.get({
+            length: 6,
+            numbers: true
+        });
+        User.findOne({
+            username: req.body.username
+        }, function (err, user) {
+            if(err) {
+                console.log(err);
+            } else {
+                user.posts.push(key);
+                user.save();
+            }
+        })
+      }
+        var post = new Post({
+            _id: key,
+            username: req.body.username,
+            image: '',
+            title: req.body.title,
+            body: req.body.post,
+            votes: 0
+        });
+        var postVote = new PostVotes({
+            _id: key,
+            likeCount: 0,
+            dislikeCount: 0,
+            likes: [],
+            dislikes: []
+        })
+
+        post.save();
+        postVote.save();
+
+        res.redirect('/');
+
 })
 
 app.post("/save/:postID",function(req,res){
