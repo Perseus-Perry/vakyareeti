@@ -27,15 +27,16 @@
   background:#ffffff;
   border-radius: 5px;
   height:50%;
-  width:60%;
+  width:70%;
   position:absolute;
-    left:20%;
+    left:15%;
     top:20%;
   text-align:center;
+  padding: 5px;
 }
 
 .content {
- text-align:justify;
+ text-align:left;
 }
 
 .resp-sharing-button__link,

@@ -82,7 +82,8 @@ var postSchema = mongoose.Schema({
     image: String,
     title: String,
     body: String,
-    votes: Number
+    votes: Number,
+    seriesID: String
   }
 
   , {
@@ -97,21 +98,23 @@ var postVotesSchema = mongoose.Schema({
     dislikeCount: Number,
     likes: Array,
     dislikes: Array
-  }
+  });
 
-);
+var seriesSchema = mongoose.Schema({
+  seriesName: String,
+  creatorName: String,
+  creatorUserName: String,
+  postIDs: Array,
+  postTitles: Array
+});
 
-var codesSchema = mongoose.Schema({
-    code: String
-  }
-
-);
 
 mongoose.plugin(passportLocalMongoose);
 
 
 var User = usersDB.model("User", usersSchema);
 var Post = postsDB.model("Post", postSchema);
+var Series = postsDB.model("Series", seriesSchema);
 var PostVotes = postVotesDB.model("PostVote", postVotesSchema);
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
@@ -212,7 +215,9 @@ app.get('/account', function(req, res) {
         }
         else{
           console.log(doc)
-          res.render('account',{currentUser:req.user.username,url:doc.profilePic,bio:doc.bio});
+          res.render('account',{currentUser:req.user.username,
+            url:doc.profilePic,
+            bio:doc.bio});
         }
       })    }
   }
@@ -223,11 +228,13 @@ app.get("/compose", function(req, res) {
     if(!req.isAuthenticated()) {
       res.redirect('/authenticate')
     } else {
-      res.render("compose", {
-          currentUser: req.user.username,
-          isMobile: mobile()
+      Series.find({})
+     .then((data)=>{
+        console.log(data);
+      });
+      res.render("compose",{
+          currentUser: req.user.username
         }
-
       );
     }
   }
@@ -760,9 +767,7 @@ app.post('/register', function(req, res) {
           var key = randkey.get({
               length: 6,
               numbers: true
-            }
-
-          );
+            });
 
           User.findOne({
               username: req.body.username
@@ -838,38 +843,36 @@ app.post('/register', function(req, res) {
     app.post("/remove/:postID", function(req, res) {
         Post.findOne({
             _id: req.params.postID
-          }
-
-          ,
+          },
           function(err, result) {
-            if(err) {
-              console.log(err)
-            } else {
+            if(err) {console.log(err)}
+            else {
               if(result === null) {
                 res.redirect('/')
               } else {
                 Post.deleteOne({
                     _id: req.params.postID
-                  }
-
-                  ,
+                  },
                   function(err) {
-                    if(err) {
-                      console.log(err);
-                    } else {
-                      res.redirect("/");
-                    }
-                  }
-
-                );
+                    if(err) {console.log(err);}
+                       else {res.redirect("/");}
+                  })
               }
             }
           }
+        );});
 
-        );
-      }
+    app.post("/newSeries", function(req, res){
+      var series = new Series({
+        seriesName: req.body.seriesName,
+        creatorName: req.user.name,
+        creatorUserName: req.user.username,
+        postIDs: {},
+        postTitles: {}
+      });
+      series.save();
 
-    )
+    });
 
     io.on('connection', function(socket) {
         socket.on('upvote', (id) => {
