@@ -1006,25 +1006,6 @@ app.post('/register', function(req, res) {
 
         )
 
-        socket.on('generate', (data) => {
-            var key = randkey.get({
-                length: 6,
-                numbers: true
-              }
-
-            );
-
-            var code = new Code({
-                code: key
-              }
-
-            );
-
-            code.save();
-            var destination = '/admin-invite';
-            socket.emit('redirect', destination);
-          }
-
         )
       }
 
