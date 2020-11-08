@@ -21,9 +21,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
     extended: true
-  }
-
-));
+}));
 app.use(express.static("public"));
 
 app.use(session({
@@ -56,11 +54,7 @@ const usersDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG
 const postVotesDB = mongoose.createConnection("mongodb+srv://admin-rohan:hokjvhJL3OG0mRWb@vakyareeti-cluster0-gv8rz.mongodb.net/Votes?retryWrites=true/postVotesDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  }
-
-);
-
-
+  };
 
 var usersSchema = mongoose.Schema({
     name: String,
@@ -72,9 +66,7 @@ var usersSchema = mongoose.Schema({
     following: Array,
     posts: Array,
     savedPosts: Array
-  }
-
-);
+  });
 
 var postSchema = mongoose.Schema({
     _id: String,
@@ -85,12 +77,9 @@ var postSchema = mongoose.Schema({
     votes: Number,
     seriesID: String
   }
-
   , {
     timestamps: true
-  }
-
-);
+  });
 
 var postVotesSchema = mongoose.Schema({
     _id: String,
@@ -126,13 +115,9 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/", function(req, res) {
-
-
     var success = true;
 
-    Post.find({}
-
-    ).sort('-createdAt').exec(function(err, posts) {
+    Post.find({}).sort('-createdAt').exec(function(err, posts) {
         if(err) {
           console.log(err);
           success = false;
@@ -143,56 +128,37 @@ app.get("/", function(req, res) {
                 currentUser: req.user.username,
                 posts: posts,
                 isMobile: mobile()
-              }
-
-            );
+              });
           } else {
             res.render("feed", {
                 currentUser: "",
                 posts: posts,
                 isMobile: mobile()
-              }
-
-            );
+              });
           }
-
         }
-      }
-
-    );
+      });
 
     if(!success) {
       res.send("<h1>Error while loading the posts</h1>")
     }
-
-  }
-
-);
-
+  });
 
 
 app.get("/explore", function(req, res) {
-
     if(req.isAuthenticated()) {
-
       var success = true;
 
-      Post.find({}
-
-      ).sort('-createdAt').exec(function(err, posts) {
+      Post.find({}).sort('-createdAt').exec(function(err, posts) {
           if(err) {
             console.log(err);
             success = false;
           } else {
             res.render("explore", {
                 posts: posts
-              }
-
-            );
+              });
           }
-        }
-
-      );
+        });
 
       if(!success) {
         res.send("<h1>Error while loading the posts</h1>")
@@ -200,10 +166,7 @@ app.get("/explore", function(req, res) {
     } else {
       res.redirect('/authenticate');
     }
-
-  }
-
-);
+});
 
 app.get('/account', function(req, res) {
     if(!req.isAuthenticated()) {
@@ -219,10 +182,9 @@ app.get('/account', function(req, res) {
             url:doc.profilePic,
             bio:doc.bio});
         }
-      })    }
-  }
-
-)
+      })
+     }
+});
 
 app.get("/compose", function(req, res) {
     if(!req.isAuthenticated()) {
@@ -234,12 +196,9 @@ app.get("/compose", function(req, res) {
       });
       res.render("compose",{
           currentUser: req.user.username
-        }
-      );
-    }
+      });
   }
-
-);
+});
 
 app.post("/update-picture/" , function(req,res){
   if(!req.isAuthenticated()) {
@@ -435,7 +394,6 @@ app.get("/user/:user", function(req, res) {
 )
 
 app.get("/authenticate", function(req, res) {
-
     if(req.isAuthenticated()) {
       res.redirect("/")
     } else {
@@ -486,11 +444,9 @@ app.post('/register', function(req, res) {
 
     })
 
-    app.get("/admin", function(req, res) {
-        res.render("admin/search", )
-      }
-
-    )
+app.get("/admin", function(req, res) {
+  res.render("admin/search", )
+});
 
     app.get("/admin-invite", function(req, res) {
         Code.find({}
@@ -668,40 +624,25 @@ app.post('/register', function(req, res) {
 
     )
 
-    app.post('/login', function(req, res) {
-
-
-
-        const user = new User({
-            username: req.body.username,
-            password: req.body.password
-          }
-
-        );
-
-
-
-        req.login(user, function(err) {
-            if(err) {
-              console.log(err)
-            } else {
-              passport.authenticate('local', {
-                  successRedirect: '/',
-                  failureRedirect: '/authenticate'
-                }
-
-              )(req, res, function() {
-                  res.redirect("/")
-                }
-
-              );
-            }
-          }
-
-        )
+app.post('/login', function(req, res) {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password
+  });
+  req.login(user, function(err) {
+      if(err) {
+        console.log(err)
+      } else {
+        passport.authenticate('local', {
+          successRedirect: '/',
+          failureRedirect: '/authenticate'
+        })(req, res, function() {
+          res.redirect("/")
+          });
+        }
       }
-
     )
+});
 
     app.post("/compose", function(req, res) {
         if(!req.isAuthenticated()) {
@@ -1006,7 +947,7 @@ app.post('/register', function(req, res) {
 
         )
 
-        
+
       }
 
     )
